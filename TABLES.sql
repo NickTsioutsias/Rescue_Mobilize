@@ -12,34 +12,28 @@ CREATE TABLE users (
 );
 
 CREATE TABLE admin (
-  users_id INT NOT NULL,
-  admin_id INT NOT NULL AUTO_INCREMENT,
-  PRIMARY KEY(admin_id),
-  CONSTRAINT fk_admin_id FOREIGN KEY(users_id)
+  admin_id INT NOT NULL,
+  CONSTRAINT fk_admin_id FOREIGN KEY(admin_id)
   REFERENCES users(users_id)
   ON DELETE CASCADE
   ON UPDATE CASCADE
 );
 
 CREATE TABLE rescuer(
-  users_id INT NOT NULL,
-  resc_id INT NOT NULL AUTO_INCREMENT,
+  resc_id INT NOT NULL,
   curr_task TINYINT DEFAULT 0,
   r_cords POINT NOT NULL,
   car_name VARCHAR (32) NOT NULL,
-  PRIMARY KEY(resc_id),
-  CONSTRAINT fk_rescuer1_id FOREIGN KEY(users_id)
+  CONSTRAINT fk_rescuer1_id FOREIGN KEY(resc_id)
   REFERENCES users(users_id)
   ON DELETE CASCADE
   ON UPDATE CASCADE
 );
 
 CREATE TABLE citizen(
-  users_id INT NOT NULL,
-  citizen_id INT NOT NULL AUTO_INCREMENT,
+  citizen_id INT NOT NULL,
   c_cords POINT NOT NULL,
-  PRIMARY KEY(citizen_id),
-  CONSTRAINT fk_citizen_id FOREIGN KEY(users_id)
+  CONSTRAINT fk_citizen_id FOREIGN KEY(citizen_id)
   REFERENCES users(users_id)
   ON DELETE CASCADE
   ON UPDATE CASCADE
