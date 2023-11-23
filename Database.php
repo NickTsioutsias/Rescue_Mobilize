@@ -1,13 +1,13 @@
 <?php
 
-    &db_server = "localhost";
-    &db_user = "root";
-    &db_pass = "";
-    &db_name = "businessdb";
-    &conn = "";
+    $db_server = "localhost";
+    $db_user = "root";
+    $db_pass = "";
+    $db_name = "rescue_mobilize";
+    $conn = "";
 
     try{
-    &conn = mysqli_connect($db_server, &db_user, &db_pass, &db_name);
+    $conn = mysqli_connect($db_server, $db_user, $db_pass, $db_name);
     }
 
     catch(mysqli_sql_exception){
