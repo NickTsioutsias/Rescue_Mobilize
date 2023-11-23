@@ -78,4 +78,4 @@ END //
 
 DELIMITER ;
 
--- CALL InsertUserCitizen('citizen_user', 'password123', 'citizen_name', 'citizen_lastname', 'phone', 'email', 'address', 'zip', POINT(38.246229, 21.735412));
+-- CALL InsertUserCitizen('citizen_user', 'password123', 'citizen_name', 'citizen_lastname', 'phone', 'email', 'address', 0, POINT(38.246229, 21.735412));
