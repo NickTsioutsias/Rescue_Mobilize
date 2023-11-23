@@ -18,7 +18,7 @@
 --   "Oxhma_1"
 -- );
 
--- INSERT INTO citizen (citizen_id, username, password, name, lastname, phone, email, address, zip) 
+-- INSERT INTO citizen (citizen_id, username, password, name, lastname, phone, email, address, zip, c_cords) 
 -- VALUES(
 --   3,
 --   "citizen1",
