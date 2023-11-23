@@ -20,7 +20,7 @@ END //
 
 DELIMITER ;
 
--- CALL InsertUserAdmin('admin_user', 'password123');
+-- CALL InsertUserAdmin('admin_user', 'password123', 'admin_name', 'admin_lastname');
 
 
 -- Procedure for user inserts and correctly allocating user_id to resc_id
