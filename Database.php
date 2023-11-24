@@ -1,27 +1,17 @@
 <?php
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "rescue_mobilize";
 
-    $db_server = "localhost";
-    $db_user = "root";
-    $db_pass = "";
-    $db_name = "rescue_mobilize";
-    $conn = "";
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
 
-    $conn = mysqli_connect($db_server, $db_user, $db_pass, $db_name);
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
 
-    /* try{
-    $conn = mysqli_connect($db_server, $db_user, $db_pass, $db_name);
-     }
-
-    catch(mysqli_sql_exception){
-        echo"Could not connect!";
-    }
-
-    if($conn){
-        echo"You are connected!";
-    }
-
-    if($conn){
-        echo"You are connected!";
-    }
-    */
+echo "Connected successfully";
+$conn->close();
 ?>
