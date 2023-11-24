@@ -1,7 +1,7 @@
 CREATE TABLE users (
   users_id INT NOT NULL AUTO_INCREMENT,
   username varchar(32) NOT NULL,
-  password varchar(32) NOT NULL,
+  password varchar(255) NOT NULL,
   name varchar(32),
   lastname varchar(32),
   phone varchar(10),
