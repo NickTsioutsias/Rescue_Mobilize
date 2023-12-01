@@ -61,7 +61,7 @@ CREATE PROCEDURE InsertUserCitizen(
     IN phone_param VARCHAR(10),
     IN email_param VARCHAR(50),
     IN address_param VARCHAR(200),
-    IN zip_param smallint(10),
+    IN zip_param varchar(5),
     IN c_cords_param POINT
 )
 BEGIN
