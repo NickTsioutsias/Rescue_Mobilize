@@ -7,7 +7,7 @@ CREATE TABLE users (
   phone varchar(10),
   email varchar(50),
   address varchar(200),
-  zip smallint(10),
+  zip varchar(5),
   PRIMARY KEY (users_id)
 );
 
