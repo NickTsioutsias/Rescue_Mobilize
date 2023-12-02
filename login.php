@@ -28,10 +28,6 @@ if
     </form>
     
     <a href="signup.php">Sign up!</a>
-    
-    <form action="includes/logout.php" method="post" id="login-form">
-      <button type="submit" id="logout-button" name="logout-submit">Logout</button>
-    </form>
       
     <p id="error-message" class="error-message"></p>
   </div>
