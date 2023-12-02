@@ -15,6 +15,9 @@
   // If we are logged in we can do stuff here
     if (isset($_SESSION['user_id'])) {
       echo '<p class="login-status">You are logged in!</p>';
+      echo '<form action="includes/logout.php" method="post" id="login-form">
+      <button type="submit" id="logout-button" name="logout-submit">Logout</button>
+      </form>';
     }
     else {
       // If we are logged out different stuff happen in here
