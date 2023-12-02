@@ -1,17 +1,19 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
+$dbservername = "localhost";
+$dbusername = "root";
+$dbpassword = "";
 $dbname = "rescue_mobilize";
 
 // Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
+$conn = mysqli_connect($dbservername, $dbusername, $dbpassword, $dbname);
 
 // Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
+} else {
+    echo "You are connected";
 }
 
-echo "Connected successfully";
-$conn->close();
+// echo "Connected successfully";
+// $conn->close();
 ?>
