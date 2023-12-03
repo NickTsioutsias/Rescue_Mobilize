@@ -1,5 +1,6 @@
 <?php
   require "config.php";
+  require "database.php";
 ?>
 
 <!DOCTYPE html>
@@ -18,6 +19,21 @@
       echo '<form action="includes/logout.php" method="post" id="login-form">
       <button type="submit" id="logout-button" name="logout-submit">Logout</button>
       </form>';
+
+      // Check if logged in user is an Admin. In this if statement we can make the admin user experience
+      if($_SESSION['role'] == 'admin'){
+        echo '<a href="signuprescuer.php">Create a Rescuer account.</a><br>';
+      }
+      
+      // Check if logged in user is a rescuer. In this if statement we can make the rescuer user experience      
+      if($_SESSION['role'] == 'rescuer'){
+        echo 'rescuer things happen in here';
+      }
+      
+      // Check if logged in user is a citizen. In this if statement we can make the citizen user experience
+      if($_SESSION['role'] == 'citizen'){
+        echo 'citizen things happen in here';
+      }
     }
     else {
       // If we are logged out different stuff happen in here
@@ -29,7 +45,8 @@
   // If we are not logged in we will be able to see the login url 
   if (!isset($_SESSION['user_id'])) {
     echo '<a href="login.php">Login</a> <br>';  
-    echo '<a href="signup.php">Signup</a>';
+    echo '<a href="signup.php">Signup</a> <br>';
+    echo '<a href="adminlogin.php">Login for Admins only!</a> <br>';
   }
   else {
     // If we are we cannot see the login url
@@ -38,6 +55,7 @@
 ?>
 
 <?php
+  // Error Handling
   $fullUrl = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 
   if(strpos($fullUrl, "signup=empty") == true){
@@ -93,6 +111,12 @@
   }
   elseif(strpos($fullUrl, "error=nouser") == true){
     echo "There is no user with this username";
+  }
+  elseif(strpos($fullUrl, "error=noadminuser") == true){
+    echo "There is no admin like that";
+  }
+  elseif(strpos($fullUrl, "signup=invalidcarname") == true){
+    echo "Invalid car name";
   }
 ?>
 

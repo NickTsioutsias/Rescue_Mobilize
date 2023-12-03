@@ -31,7 +31,7 @@
         $result = mysqli_stmt_get_result($stmt);
         // Make the data into associative array where column names are used as keys and has the values of $result
         if ($row = mysqli_fetch_assoc($result)) {
-          // match hashed password from database to password from submission 
+          // Match hashed password from database to password from submission 
           $pwdCheck = password_verify($password, $row['password']);
           if ($pwdCheck == false) {
             header("Location: ../index.php?error=wrongpwd");
@@ -40,6 +40,7 @@
           elseif($pwdCheck == true) {
             session_start();
             $_SESSION['user_id'] = $row['users_id'];
+            $_SESSION['role'] = $row['role'];
 
             // Redirect to index.php and give success message
             header("Location: ../index.php?login=success");
