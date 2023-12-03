@@ -8,6 +8,7 @@ CREATE TABLE users (
   email varchar(50),
   address varchar(200),
   zip varchar(5),
+  role ENUM('admin', 'citizen', 'rescuer') NOT NULL, 
   PRIMARY KEY (users_id)
 );
 
