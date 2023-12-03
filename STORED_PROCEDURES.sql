@@ -9,7 +9,7 @@ CREATE PROCEDURE InsertUserAdmin(
 )
 BEGIN
     -- Insert into users table
-    INSERT INTO users (username, password, name, lastname) VALUES (username_param, password_param, name_param, lastname_param);
+    INSERT INTO users (username, password, name, lastname, role) VALUES (username_param, password_param, name_param, lastname_param, 'admin');
 
     -- Get the last inserted user_id, admin_id
     SET @last_user_id = LAST_INSERT_ID();
@@ -36,7 +36,7 @@ CREATE PROCEDURE InsertUserRescuer(
 )
 BEGIN
     -- Insert into users table
-    INSERT INTO users (username, password, name, lastname) VALUES (username_param, password_param, name_param, lastname_param);
+    INSERT INTO users (username, password, name, lastname, role) VALUES (username_param, password_param, name_param, lastname_param, 'rescuer');
 
     -- Get the last inserted user_id
     SET @last_user_id = LAST_INSERT_ID();
@@ -66,8 +66,8 @@ CREATE PROCEDURE InsertUserCitizen(
 )
 BEGIN
     -- Insert into User table
-    INSERT INTO users (username, password, name, lastname, phone, email, address, zip) 
-    VALUES (username_param, password_param, name_param, lastname_param, phone_param, email_param, address_param, zip_param);
+    INSERT INTO users (username, password, name, lastname, phone, email, address, zip, role) 
+    VALUES (username_param, password_param, name_param, lastname_param, phone_param, email_param, address_param, zip_param, 'citizen');
 
     -- Get the last inserted user_id
     SET @last_user_id = LAST_INSERT_ID();
