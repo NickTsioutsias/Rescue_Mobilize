@@ -116,11 +116,12 @@
       
       // Create string look-alike of POINT datatype to get converted later in sql 
       $wktPoint = "POINT($longitude $latitude)"; 
+      $role = "citizen";
 
       // First insert values in users table
       // SQL query
-      $sql = "INSERT INTO users (username, password, name, lastname, phone, email, address, zip) 
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?);"; 
+      $sql = "INSERT INTO users (username, password, name, lastname, phone, email, address, zip, role) 
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);"; 
 
       // Create prepared statement
       // Initialise connection with the database
@@ -132,7 +133,7 @@
       } else {
         // Bind the placeholder "?" parameters to the statement stmts 
         // s = string, i = integer, b = BLOB, d = double
-        mysqli_stmt_bind_param($stmt, "ssssssss", $username, $hash, $name, $lastname, $phone, $email, $address, $zip);
+        mysqli_stmt_bind_param($stmt, "sssssssss", $username, $hash, $name, $lastname, $phone, $email, $address, $zip, $role);
         // Execute the statement inside the database
         mysqli_stmt_execute($stmt);
       }
