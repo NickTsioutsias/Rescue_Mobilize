@@ -5,7 +5,8 @@ CREATE TABLE users (
   name varchar(32),
   lastname varchar(32),
   phone varchar(10),
-  email varchar(50),
+  country varchar(255),
+  city varchar(255),
   address varchar(200),
   zip varchar(5),
   role ENUM('admin', 'citizen', 'rescuer') NOT NULL, 
@@ -33,7 +34,6 @@ CREATE TABLE rescuer(
 
 CREATE TABLE citizen(
   citizen_id INT NOT NULL,
-  c_cords POINT NOT NULL,
   CONSTRAINT fk_citizen_id FOREIGN KEY(citizen_id)
   REFERENCES users(users_id)
   ON DELETE CASCADE

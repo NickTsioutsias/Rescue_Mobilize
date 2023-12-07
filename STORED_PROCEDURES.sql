@@ -59,15 +59,16 @@ CREATE PROCEDURE InsertUserCitizen(
     IN name_param VARCHAR(32),
     IN lastname_param VARCHAR(32),
     IN phone_param VARCHAR(10),
-    IN email_param VARCHAR(50),
+    IN country_param VARCHAR(255),
+    IN city_param VARCHAR(255),
     IN address_param VARCHAR(200),
     IN zip_param varchar(5),
     IN c_cords_param POINT
 )
 BEGIN
     -- Insert into User table
-    INSERT INTO users (username, password, name, lastname, phone, email, address, zip, role) 
-    VALUES (username_param, password_param, name_param, lastname_param, phone_param, email_param, address_param, zip_param, 'citizen');
+    INSERT INTO users (username, password, name, lastname, phone, country, city, address, zip, role) 
+    VALUES (username_param, password_param, name_param, lastname_param, phone_param, country_param, city_param, address_param, zip_param, 'citizen');
 
     -- Get the last inserted user_id
     SET @last_user_id = LAST_INSERT_ID();
@@ -78,4 +79,4 @@ END //
 
 DELIMITER ;
 
--- CALL InsertUserCitizen('citizen_user', 'password123', 'citizen_name', 'citizen_lastname', 'phone', 'email', 'address', 0, POINT(38.246229, 21.735412));
+-- CALL InsertUserCitizen('citizen_user', 'password123', 'citizen_name', 'citizen_lastname', '6944444444', 'Greece', 'Patras', 'Kronou 14', 26334);
