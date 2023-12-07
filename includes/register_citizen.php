@@ -102,7 +102,7 @@
         $resultCheck = mysqli_stmt_num_rows($stmt);
         // If more than 0 usernames exist, username is not unique
         if ($resultCheck > 0) {
-          header("Location: ../index.php?error=usernametaken");
+          header("Location: register_citizen.php?error=usernametaken");
           exit();
         }
       }
