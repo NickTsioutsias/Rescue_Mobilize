@@ -113,9 +113,7 @@
   elseif(strpos($fullUrl, "signup=success") == true){
     echo "Hooray! You Signed up!";
   }
-  elseif(strpos($fullUrl, "login=empty") == true){
-    echo "Please fill in all fields";
-  }
+
   elseif(strpos($fullUrl, "error=wrongpwd") == true){
     echo "Wrong Password";
   }

@@ -42,8 +42,13 @@
       </div>
       
       <div class="form-group">
-        <label>Email</label>
-        <input type="text" id="email" name="email">
+        <label>Country</label>
+        <input type="text" id="country" name="country">
+      </div>
+      
+      <div class="form-group">
+        <label>City</label>
+        <input type="text" id="city" name="city">
       </div>
       
       <div class="form-group">
@@ -55,18 +60,8 @@
         <label>Zip</label>
         <input type="text" id="zip" name="zip">
       </div>
-      
-      <div class="form-group">
-        <label for="latitude">Latitude:</label>
-        <input type="text" name="latitude">
-      </div>
-      
-      <div> 
-        <label for="longitude">Longitude:</label>
-        <input type="text" name="longitude">
-      </div>
-      
-      <button type="submit" name="signup-submit" id="submit-button">Register</button>
+
+      <button type="submit" name="signup-submit" id="submit-button" onclick="FieldsTest()">Register</button>
       
     </form>
     
@@ -74,7 +69,7 @@
   
   </div>
 
-  <script src="script.js"></script>
+  <script src="SignU.js"></script>
 
 </body>
 </html>

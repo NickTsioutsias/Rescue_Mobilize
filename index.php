@@ -23,7 +23,7 @@
         <label for="password">Password</label>
         <input type="password" id="password" name="password">
       </div>
-      <button type="submit" id="submit-button">Login</button>
+      <button type="submit" id="submit-button" onclick="FieldsTest()">Login</button>
     </form>
     
     <a href="signup.php">Sign up!</a>
@@ -31,7 +31,7 @@
     <p id="error-message" class="error-message"></p>
   </div>
 
-  <script src="script.js"></script>
+  <script src="LoginJS.js"></script>
   
 </body>
 </html>
