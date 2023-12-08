@@ -68,7 +68,7 @@
       $zip = filter_input(INPUT_POST, "zip", FILTER_SANITIZE_SPECIAL_CHARS);      
             
       // Checking for unique username and phone
-      $sql = "SELECT username, phone FROM users WHERE username = ?, ?";
+      $sql = "SELECT username, phone FROM users WHERE username = ? AND phone = ?";
       // Create prepared statement
       // Initialise connection with the database
       $stmt = mysqli_stmt_init($conn);
