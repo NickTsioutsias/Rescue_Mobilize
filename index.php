@@ -23,8 +23,25 @@
         <label for="password">Password</label>
         <input type="password" id="password" name="password">
       </div>
+      <?php
+        // Error Handling
+        $fullUrl = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+
+        if(strpos($fullUrl, "error=wrongpwd") == true){
+          echo '<p> Wrong password</p>';
+        }
+        elseif(strpos($fullUrl, "error=nouser") == true){
+          echo '<p> There is no user with this username</p>';
+        }
+      ?>
       <button type="submit" id="submit-button" onclick="FieldsTest()">Login</button>
     </form>
+
+    <?php
+        if(strpos($fullUrl, "error=sqlerror") == true){
+          echo '<p>There was an SQL error</p>';
+        }
+    ?>
     
     <a href="signup.php">Sign up!</a>
       
