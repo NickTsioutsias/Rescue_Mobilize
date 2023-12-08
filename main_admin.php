@@ -2,10 +2,9 @@
   require "database.php";
   require "config.php";
   // If we are not logged in stuff happens here
-  if (!isset($_SESSION['user_id'])) {
+  if ($_SESSION['role'] == 'admin') {
     header("Location: index.php");
     exit();
-    
   }
 ?>
 
@@ -35,6 +34,9 @@
     button{
       height: 10%;
     }
+    .navbar{
+
+    }
   </style>    
   </head>
   <body>
@@ -46,29 +48,15 @@
           <button type="submit" id="logout-button" name="logout-submit">Logout</button>
           </form>
         </li>
-        <?php
-          // Check if logged in user is an Admin. In this if statement we can make the admin user experience
-          if($_SESSION['role'] == 'admin'){
-            // Page for rescuer registration
-            echo '<li><a href="signuprescuer.php">Create a Rescuer account.</a></li>';
-            // Page for adding new categories in database
-            echo '<li><a href="insert_category.php">Insert categories.</a></li>';
-            // Page for adding new items in database
-            echo '<li><a href="insert_item.php">Insert items.</a></li>';
-            // Page for altering quantities of items in database
-            echo '<li><a href="item_quantity.php">Change quantity of items here.</a></li>';
-          }
-          
-          // Check if logged in user is a rescuer. In this if statement we can make the rescuer user experience      
-          if($_SESSION['role'] == 'rescuer'){
-            // Rescuer does things here
-          }
-          
-          // Check if logged in user is a citizen. In this if statement we can make the citizen user experience
-          if($_SESSION['role'] == 'citizen'){
-            // Citizen things happen in here
-          }
-        ?> 
+        <!-- Page for rescuer registration -->
+        <li><a href="signuprescuer.php">Create a Rescuer account.</a></li>
+          <!-- Page for adding new categories in database -->
+        <li><a href="insert_category.php">Insert categories.</a></li>
+        <!--  Page for adding new items in database -->
+        <li><a href="insert_item.php">Insert items.</a></li>
+        <!-- Page for altering quantities of items in database -->
+        <li><a href="item_quantity.php">Change quantity of items here.</a></li>
+        <li><a href="create_news.php">Create news.</a></li>
         <li><a href="#">Home</a></li>
         <li><a href="#">About</a></li>
         <li><a href="#">Contact</a></li>
@@ -100,6 +88,9 @@
 
     // Make marker popup
     marker.bindPopup("<b>Citizen name</b><br><b>Citizen lastname</b><br><b>Citizen phone</b><br><b>Citizen lastname</b><br>.").openPopup();
+
+    
+
   </script>
   </div>
     
