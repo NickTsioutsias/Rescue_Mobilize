@@ -53,12 +53,12 @@ CREATE TABLE category(
 );
 
 CREATE TABLE inventory(
-  prod_id INT NOT NULL AUTO_INCREMENT,
-  prod_name VARCHAR(50) NOT NULL,
+  id INT NOT NULL AUTO_INCREMENT,
+  name VARCHAR(50) NOT NULL,
   description TEXT,
   quantity INT DEFAULT 0,
   categ_id INT NOT NULL,
-  PRIMARY KEY(prod_id),
+  PRIMARY KEY(id),
   CONSTRAINT fk_categ_id FOREIGN KEY(categ_id)
   REFERENCES category(categ_id)
   ON DELETE CASCADE
@@ -67,23 +67,23 @@ CREATE TABLE inventory(
 
 CREATE TABLE car_inv(
   resc_id INT NOT NULL,
-  prod_id INT NOT NULL,
+  id INT NOT NULL,
   CONSTRAINT fk_rescuer2_id FOREIGN KEY(resc_id)
   REFERENCES rescuer(resc_id)
   ON DELETE CASCADE
   ON UPDATE CASCADE,
 
-  CONSTRAINT fk_prod1_id FOREIGN KEY(prod_id)
-  REFERENCES inventory(prod_id)
+  CONSTRAINT fk_prod1_id FOREIGN KEY(id)
+  REFERENCES inventory(id)
   ON DELETE CASCADE
   ON UPDATE CASCADE
 );
 
 CREATE TABLE announced_item(
-  prod_id INT NOT NULL,
+  id INT NOT NULL,
   announ_id INT NOT NULL,
-  CONSTRAINT fk_prod2_id FOREIGN KEY(prod_id)
-  REFERENCES inventory(prod_id)
+  CONSTRAINT fk_prod2_id FOREIGN KEY(id)
+  REFERENCES inventory(id)
   ON DELETE CASCADE
   ON UPDATE CASCADE,
   
@@ -105,7 +105,7 @@ CREATE TABLE request(
   request_id INT NOT NULL,
   citizen_id INT NOT NULL,
   resc_id INT NOT NULL,
-  prod_id INT NOT NULL,
+  id INT NOT NULL,
   occ_date DATETIME DEFAULT NULL,
   ppl INT DEFAULT 1,
   CONSTRAINT fk_request1_id FOREIGN KEY(request_id)
@@ -113,8 +113,8 @@ CREATE TABLE request(
   ON DELETE CASCADE
   ON UPDATE CASCADE,
 
-  CONSTRAINT fk_prod3_id FOREIGN KEY(prod_id)
-  REFERENCES inventory(prod_id)
+  CONSTRAINT fk_prod3_id FOREIGN KEY(id)
+  REFERENCES inventory(id)
   ON DELETE CASCADE
   ON UPDATE CASCADE,
 
@@ -133,7 +133,7 @@ CREATE TABLE donation(
   donate_id INT NOT NULL,
   citizen_id INT NOT NULL,
   resc_id INT DEFAULT NULL,
-  prod_id INT NOT NULL,
+  id INT NOT NULL,
   occ_date DATETIME DEFAULT NULL,
   quantity INT DEFAULT 1,
   CONSTRAINT fk_donate1_id FOREIGN KEY(donate_id)
@@ -141,8 +141,8 @@ CREATE TABLE donation(
   ON DELETE CASCADE
   ON UPDATE CASCADE,
 
-  CONSTRAINT fk_prod4_id FOREIGN KEY(prod_id)
-  REFERENCES inventory(prod_id)
+  CONSTRAINT fk_prod4_id FOREIGN KEY(id)
+  REFERENCES inventory(id)
   ON DELETE CASCADE
   ON UPDATE CASCADE,
 
