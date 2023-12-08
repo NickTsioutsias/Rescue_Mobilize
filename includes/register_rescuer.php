@@ -118,31 +118,31 @@
         mysqli_stmt_bind_param($stmt, "sssss", $username, $hash, $name, $lastname, $role);
         // Execute the statement inside the database
         mysqli_stmt_execute($stmt);
-      }
-
-      // Get the last inserted user_id
-      $last_inserted_id = mysqli_insert_id($conn);
-
-      // Last insert values in rescuer table with last inserted_id
-      // SQL query
-      $sql = " INSERT INTO rescuer (resc_id, r_cords, car_name) 
-      VALUES (?, ST_GeomFromText(?), ?);";
-
-      // Create prepared statement
-      // Initialise connection with the database
-      $stmt = mysqli_stmt_init($conn);
-      // Prepare the statement using the $sql query
-      if (!mysqli_stmt_prepare($stmt, $sql)) {
-        header("Location: ../index.php?error=sqlerror");
-        exit();
-      } else {
-        // Bind the placeholder "?" parameters to the statement stmts 
-        // s = string, i = integer, b = BLOB, d = double
-        mysqli_stmt_bind_param($stmt, "iss", $last_inserted_id, $wktPoint, $carname);
-        // Execute the statement inside the database
-        mysqli_stmt_execute($stmt);
-      }
       
+
+        // Get the last inserted user_id
+        $last_inserted_id = mysqli_insert_id($conn);
+
+        // Last insert values in rescuer table with last inserted_id
+        // SQL query
+        $sql = " INSERT INTO rescuer (resc_id, r_cords, car_name) 
+        VALUES (?, ST_GeomFromText(?), ?);";
+
+        // Create prepared statement
+        // Initialise connection with the database
+        $stmt = mysqli_stmt_init($conn);
+        // Prepare the statement using the $sql query
+        if (!mysqli_stmt_prepare($stmt, $sql)) {
+          header("Location: ../index.php?error=sqlerror");
+          exit();
+        } else {
+          // Bind the placeholder "?" parameters to the statement stmts 
+          // s = string, i = integer, b = BLOB, d = double
+          mysqli_stmt_bind_param($stmt, "iss", $last_inserted_id, $wktPoint, $carname);
+          // Execute the statement inside the database
+          mysqli_stmt_execute($stmt);
+        }
+      }
 
     }
 
