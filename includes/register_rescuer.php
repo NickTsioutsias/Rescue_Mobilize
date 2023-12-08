@@ -16,7 +16,7 @@
     $longitude = $_POST['longitude'];
 
       // Validate submitted items
-      if(preg_match("/^[a-zA-Z0-9_]{1,20}*$/", $username)){
+      if(!preg_match("/^[a-zA-Z0-9_]{1,20}$/", $username)){
         header("Location: ../signuprescuer.php?signup=wrongusername");
         exit();
       }
@@ -134,7 +134,11 @@
           // Execute the statement inside the database
           mysqli_stmt_execute($stmt);
         }
+
+        // Get new rescuer data to a json file
+        require "rescuer_to_json.php";
       }
+      
 
     
 
@@ -142,6 +146,6 @@
       
       mysqli_stmt_close($stmt);
       mysqli_close($conn);  
-    }  
+  }  
     
     
