@@ -2,7 +2,7 @@
   require "database.php";
   require "config.php";
   // If we are not logged in stuff happens here
-  if ($_SESSION['role'] == 'admin') {
+  if ($_SESSION['role'] != 'admin') {
     header("Location: index.php");
     exit();
   }
@@ -35,7 +35,7 @@
       height: 10%;
     }
     .navbar{
-
+      /* Place CSS for navigation bar here */
     }
   </style>    
   </head>
@@ -65,12 +65,6 @@
     
 
   
-
- 
-
-  <div>
-
-  </div>
   
   <!--  Create map for the user -->
   <div id="map">

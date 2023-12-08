@@ -36,14 +36,14 @@
         header("Location: ../signuprescuer.php?signup=invalidcarname");
         exit();
       }  
-      elseif(!preg_match("/^-?([1-8]?[1-9]|[1-9]0)\.{1}\d{1,6}$/", $latitude)){
+      elseif (!preg_match("/^-?((1[0-7]\d(\.\d{1,6})?)|([1-9]?\d(\.\d{1,6})?)|180(\.0{1,6})?)$/", $latitude)) {
         header("Location: ../signuprescuer.php?signup=invalidlatitude");
         exit();
-      } 
-      elseif(!preg_match("/^-?([1-8]?[1-9]|[1-9]0)\.{1}\d{1,6}$/", $longitude)){
+    } 
+    elseif (!preg_match("/^-?((1[0-7]\d(\.\d{1,6})?)|([1-9]?\d(\.\d{1,6})?)|180(\.0{1,6})?)$/", $longitude)) {
         header("Location: ../signuprescuer.php?signup=invalidlongtitude");
         exit();
-      }
+    }
       
       // Sanitization techniques: filtering malicious script
       $username = filter_input(INPUT_POST, "username", FILTER_SANITIZE_SPECIAL_CHARS);
@@ -80,16 +80,12 @@
           exit();
         }
       }
-
-
       
       // Create a rescuer user
 
       // Hash password for password integrity in the database
       $hash = password_hash($password, PASSWORD_DEFAULT);
       
-      // Create string look-alike of POINT datatype to get converted later in sql 
-      $wktPoint = "POINT($longitude $latitude)"; 
       $role = "rescuer";
 
       // First insert values in users table
@@ -117,7 +113,7 @@
 
         // Last insert values in rescuer table with last inserted_id
         // SQL query
-        $sql = " INSERT INTO rescuer (resc_id, r_cords, car_name) 
+        $sql = "INSERT INTO rescuer (resc_id, r_cords, car_name) 
         VALUES (?, ST_GeomFromText(?), ?);";
 
         // Create prepared statement
@@ -127,7 +123,10 @@
         if (!mysqli_stmt_prepare($stmt, $sql)) {
           header("Location: ../signuprescuer.php?error=sqlerror");
           exit();
-        } else {
+        } 
+        else {
+          // Create string look-alike of POINT datatype to get converted later in sql 
+           $wktPoint = "POINT($longitude $latitude)";
           // Bind the placeholder "?" parameters to the statement stmts 
           // s = string, i = integer, b = BLOB, d = double
           mysqli_stmt_bind_param($stmt, "iss", $last_inserted_id, $wktPoint, $carname);
@@ -138,12 +137,8 @@
         // Get new rescuer data to a json file
         require "rescuer_to_json.php";
       }
-      
-
     
-
       header("Location: ../main.php?signup=success");
-      
       mysqli_stmt_close($stmt);
       mysqli_close($conn);  
   }  

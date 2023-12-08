@@ -18,7 +18,7 @@
 --   "Oxhma_1"
 -- );
 
--- INSERT INTO citizen (citizen_id, username, password, name, lastname, phone, email, address, zip, c_cords) 
+-- INSERT INTO citizen (citizen_id, username, password, name, lastname, phone, country, city, address, zip) 
 -- VALUES(
 --   3,
 --   "citizen1",
@@ -30,3 +30,8 @@
 --   "Pantanashs",
 --   10
 -- );
+
+-- PARADEIGMATA GIA THN FORMA
+-- CITIZEN: username: user, password: user, name: user, lastname: user, phone: 1111111111, country: user, city: user, address: user, zip: 11111 
+-- RESCUER: username: rescuer, password: rescuer, name: rescuer, lastname: rescuer, latitude: 38.246229, longtitude: 21.735412, car_name: carname 
+-- ADMIN: username: admin_user, password: password123

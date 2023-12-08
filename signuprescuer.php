@@ -2,6 +2,10 @@
   require "config.php";
   // Error Handling
   $fullUrl = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+  if($_SESSION['role'] != 'admin'){
+    header("Location: main.php");
+    exit();
+  }
 ?>
 
 <!DOCTYPE html>

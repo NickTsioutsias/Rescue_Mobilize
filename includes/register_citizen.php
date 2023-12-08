@@ -21,6 +21,7 @@
       if(!preg_match("/^[a-zA-Z0-9_.\s]{1,20}$/", $username)){
         header("Location: ../signup.php?signup=wrongusername");
         exit();
+        // &username=".$password."&name=".$name."&lastname=".$lastname."&phone=".$phone."&country=".$country."&city=".$city."&address=".$address."&zip=".$zip."
       }
       elseif(!preg_match("/^[a-zA-Z0-9!_]*$/", $password)){
         header("Location: ../signup.php?signup=invalidpassword");
@@ -138,7 +139,8 @@
         if (!mysqli_stmt_prepare($stmt, $sql)) {
           header("Location: ../signup.php?error=sqlerror");
           exit();
-        } else {
+        } 
+        else {
           // Bind the placeholder "?" parameters to the statement stmts 
           // s = string, i = integer, b = BLOB, d = double
           mysqli_stmt_bind_param($stmt, "i", $last_inserted_id);
@@ -150,7 +152,7 @@
          require "citizen_to_json.php";
       }
 
-    header("Location: ../main.php?signup=success");
+    header("Location: ../main_citizen.php?signup=success");
     
     mysqli_stmt_close($stmt);
     mysqli_close($conn);  

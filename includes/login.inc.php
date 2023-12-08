@@ -5,12 +5,7 @@
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    // If username or password not submitted get redirected to index.php
-    if (empty($username) || empty($password)) {
-      header("Location: ../index.php?login=empty");
-      exit();
-    }
-    else {
+
       // Select username which corresponds to the submitted username
       $sql = "SELECT * FROM users WHERE username = ?;";
       // Create prepared statement
@@ -41,10 +36,14 @@
             session_start();
             $_SESSION['user_id'] = $row['users_id'];
             $_SESSION['role'] = $row['role'];
-
-            // Redirect to index.php and give success message
-            header("Location: ../main.php?login=success");
-            exit();
+            if($_SESSION['role'] == 'citizen'){
+              header("Location: ../main_citizen.php");
+              exit();
+            }
+            elseif($_SESSION['role'] == 'rescuer'){
+              header("Location: ../main_rescuer.php");
+              exit();
+            }
           }
         }
         else {
@@ -52,8 +51,6 @@
           exit();
         }
       }
-    }
-
   }
   else {
     header("Location: ../index.php");

@@ -1,10 +1,12 @@
 <?php
-    if($_SESSION['role'] != 'citizen'){
-      header("Location: index.php");
-      require "includes/logout.php";
-      exit();
-    }
-  ?>
+  require "database.php";
+  require "config.php";
+  if($_SESSION['role'] != 'citizen'){
+    header("Location: index.php");
+    require "includes/logout.php";
+    exit();
+  }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

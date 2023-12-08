@@ -38,7 +38,7 @@
             $_SESSION['role'] = $row['role'];
 
             // Redirect to index.php and give success message
-            header("Location: ../main.php?login=success");
+            header("Location: ../main_admin.php?login=success");
             exit();
           }
         }
