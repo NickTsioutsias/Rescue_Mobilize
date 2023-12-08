@@ -18,7 +18,7 @@
     $country = $_POST['country'];
 
       // Validate submitted items
-      if(preg_match("/^[a-zA-Z0-9_.\s]{1,20}*$/", $username)){
+      if(!preg_match("/^[a-zA-Z0-9_.\s]{1,20}$/", $username)){
         header("Location: ../signup.php?signup=wrongusername");
         exit();
       }
@@ -34,7 +34,7 @@
         header("Location: ../signup.php?signup=invalidlastname");
         exit();
       }    
-      elseif(preg_match("/^[0-9]{10}*$/", $phone)){
+      elseif(!preg_match("/^[0-9]{10}$/", $phone)){
         header("Location: ../signup.php?signup=invalidphone");
         exit();
       } 
@@ -50,7 +50,7 @@
         header("Location: ../signup.php?signup=invalidaddress");
         exit();
       } 
-      elseif(preg_match("/^[0-9]{5}*$/", $zip)){
+      elseif(!preg_match("/^[0-9]{5}$/", $zip)){
         header("Location: ../signup.php?signup=invalidzip");
         exit();
       }
@@ -123,7 +123,6 @@
         // Execute the statement inside the database
         mysqli_stmt_execute($stmt);
       
-
         // Get the last inserted user_id
         $last_inserted_id = mysqli_insert_id($conn);
 
@@ -146,6 +145,9 @@
           // Execute the statement inside the database
           mysqli_stmt_execute($stmt);
         }
+
+         // Get new citizen data to a json file
+         require "citizen_to_json.php";
       }
 
     header("Location: ../main.php?signup=success");
