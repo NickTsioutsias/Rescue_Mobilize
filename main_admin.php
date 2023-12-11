@@ -49,7 +49,7 @@
           </form>
         </li>
         <!-- Page for rescuer registration -->
-        <li><a href="signuprescuer.php">Create a Rescuer account.</a></li>
+        <li><a href="signup_rescuer.php">Create a Rescuer account.</a></li>
           <!-- Page for adding new categories in database -->
         <li><a href="insert_category.php">Insert categories.</a></li>
         <!--  Page for adding new items in database -->
@@ -87,6 +87,15 @@
 
   </script>
   </div>
+
+  <div id="coordinates"></div>
+
+  <script>
+    map.on('click', function (e) {
+      var coordinates = e.latlng;
+      alert("Coordinates: " + coordinates.lat + ", " + coordinates.lng);
+    });
+  </script>
     
 <?php
   // Error Handling
