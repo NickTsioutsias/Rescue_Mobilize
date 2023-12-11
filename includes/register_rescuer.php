@@ -13,7 +13,7 @@
     $lastname = $_POST['lastname'];
     $carname = $_POST['car_name'];
     $latitude = $_POST['latitude'];
-    $longitude = $_POST['longitude'];
+    $longtitude = $_POST['longtitude'];
 
       // Validate submitted items
       if(!preg_match("/^[a-zA-Z0-9_]{1,20}$/", $username)){
@@ -40,7 +40,7 @@
         header("Location: ../signup_rescuer.php?signup=invalidlatitude");
         exit();
     } 
-    elseif (!preg_match("/^-?((1[0-7]\d(\.\d{1,6})?)|([1-9]?\d(\.\d{1,6})?)|180(\.0{1,6})?)$/", $longitude)) {
+    elseif (!preg_match("/^-?((1[0-7]\d(\.\d{1,6})?)|([1-9]?\d(\.\d{1,6})?)|180(\.0{1,6})?)$/", $longtitude)) {
         header("Location: ../signup_rescuer.php?signup=invalidlongtitude");
         exit();
     }
@@ -52,7 +52,7 @@
       $lastname = filter_input(INPUT_POST, "lastname", FILTER_SANITIZE_SPECIAL_CHARS);
       $carname = filter_input(INPUT_POST, "car_name", FILTER_SANITIZE_SPECIAL_CHARS);
       $latitude = filter_input(INPUT_POST, "latitude", FILTER_SANITIZE_SPECIAL_CHARS);      
-      $longitude = filter_input(INPUT_POST, "longtitude", FILTER_SANITIZE_SPECIAL_CHARS);      
+      $longtitude = filter_input(INPUT_POST, "longtitude", FILTER_SANITIZE_SPECIAL_CHARS);      
       
       // Checking for unique username
       $sql = "SELECT username FROM users WHERE username = ?";
@@ -126,7 +126,7 @@
         } 
         else {
           // Create string look-alike of POINT datatype to get converted later in sql 
-           $wktPoint = "POINT($longitude $latitude)";
+           $wktPoint = "POINT($longtitude $latitude)";
           // Bind the placeholder "?" parameters to the statement stmts 
           // s = string, i = integer, b = BLOB, d = double
           mysqli_stmt_bind_param($stmt, "iss", $last_inserted_id, $wktPoint, $carname);

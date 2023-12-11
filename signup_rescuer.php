@@ -1,7 +1,8 @@
 <?php
   require "config.php";
-  // Error Handling
+  // Error Handling variable
   $fullUrl = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+  // Role checking
   if($_SESSION['role'] != 'admin'){
     header("Location: index.php");
     exit();
@@ -35,11 +36,13 @@
     }
 
     #form-container {
+      /* form should take a third of the page */
       width: 30%;
       padding: 20px;
     }
 
     #map-container {
+      /* map should take rest of page */
       flex: 1;
     }
 
@@ -54,7 +57,7 @@
   <div id="form-container">
     <form action="includes/logout.php" method="post" id="login-form">
       <button type="submit" id="logout-button" name="logout-submit" style="width: 200px;">Logout</button>
-      </form>
+    </form>
     <div class="login-container">
       <h2>Sign up!</h2>
 
@@ -127,8 +130,8 @@
         ?>
         
         <div> 
-          <label for="longitude">Longitude:</label>
-          <input type="text" id="longtitude" name="longitude" required>
+          <label for="longtitude">Longtitude:</label>
+          <input type="text" id="longtitude" name="longtitude" required>
         </div>
 
         <?php
@@ -173,11 +176,11 @@
     map.on('click', function (e) {
       var coordinates = e.latlng;
       var formattedLatitude = coordinates.lat.toFixed(6);
-      var formattedLongitude = coordinates.lng.toFixed(6);
+      var formattedLongtitude = coordinates.lng.toFixed(6);
       // Update the input field with the formatted latitude
       document.getElementById('latitude').value = formattedLatitude;
-      // Update the input field with the formatted longitude
-      document.getElementById('longtitude').value = formattedLongitude;
+      // Update the input field with the formatted longtitude
+      document.getElementById('longtitude').value = formattedLongtitude;
     });
   </script>
 
