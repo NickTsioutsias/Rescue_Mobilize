@@ -17,31 +17,31 @@
 
       // Validate submitted items
       if(!preg_match("/^[a-zA-Z0-9_]{1,20}$/", $username)){
-        header("Location: ../signuprescuer.php?signup=wrongusername");
+        header("Location: ../signup_rescuer.php?signup=wrongusername");
         exit();
       }
       elseif(!preg_match("/^[a-zA-Z0-9!_]*$/", $password)){
-        header("Location: ../signuprescuer.php?signup=invalidpassword");
+        header("Location: ../signup_rescuer.php?signup=invalidpassword");
         exit();
       }
       elseif(!preg_match("/^[a-zA-Z]*$/", $name)){
-        header("Location: ../signuprescuer.php?signup=invalidname");
+        header("Location: ../signup_rescuer.php?signup=invalidname");
         exit();
       }
       elseif(!preg_match("/^[a-zA-Z]*$/", $lastname)){
-        header("Location: ../signuprescuer.php?signup=invalidlastname");
+        header("Location: ../signup_rescuer.php?signup=invalidlastname");
         exit();
       }    
       elseif(!preg_match("/^[a-zA-Z0-9]*$/", $carname)){
-        header("Location: ../signuprescuer.php?signup=invalidcarname");
+        header("Location: ../signup_rescuer.php?signup=invalidcarname");
         exit();
       }  
       elseif (!preg_match("/^-?((1[0-7]\d(\.\d{1,6})?)|([1-9]?\d(\.\d{1,6})?)|180(\.0{1,6})?)$/", $latitude)) {
-        header("Location: ../signuprescuer.php?signup=invalidlatitude");
+        header("Location: ../signup_rescuer.php?signup=invalidlatitude");
         exit();
     } 
     elseif (!preg_match("/^-?((1[0-7]\d(\.\d{1,6})?)|([1-9]?\d(\.\d{1,6})?)|180(\.0{1,6})?)$/", $longitude)) {
-        header("Location: ../signuprescuer.php?signup=invalidlongtitude");
+        header("Location: ../signup_rescuer.php?signup=invalidlongtitude");
         exit();
     }
       
@@ -61,7 +61,7 @@
       $stmt = mysqli_stmt_init($conn);
       // Prepare the statement using the $sql query
       if (!mysqli_stmt_prepare($stmt, $sql)) {
-        header("Location: ../signuprescuer.php?error=sqlerror");
+        header("Location: ../signup_rescuer.php?error=sqlerror");
         exit();
       } 
       else {
@@ -76,7 +76,7 @@
         $resultCheck = mysqli_stmt_num_rows($stmt);
         // If more than 0 usernames exist, username is not unique
         if ($resultCheck > 0) {
-          header("Location: signuprescuer.php?error=usernametaken");
+          header("Location: signup_rescuer.php?error=usernametaken");
           exit();
         }
       }
@@ -98,7 +98,7 @@
       $stmt = mysqli_stmt_init($conn);
       // Prepare the statement using the $sql query
       if (!mysqli_stmt_prepare($stmt, $sql)) {
-        header("Location: ../signuprescuer.php?error=sqlerror");
+        header("Location: ../signup_rescuer.php?error=sqlerror");
         exit();
       } else {
         // Bind the placeholder "?" parameters to the statement stmts 
@@ -121,7 +121,7 @@
         $stmt = mysqli_stmt_init($conn);
         // Prepare the statement using the $sql query
         if (!mysqli_stmt_prepare($stmt, $sql)) {
-          header("Location: ../signuprescuer.php?error=sqlerror");
+          header("Location: ../signup_rescuer.php?error=sqlerror");
           exit();
         } 
         else {
@@ -138,7 +138,7 @@
         require "rescuer_to_json.php";
       }
     
-      header("Location: ../main.php?signup=success");
+      header("Location: ../main_admin.php?signup=success");
       mysqli_stmt_close($stmt);
       mysqli_close($conn);  
   }  
