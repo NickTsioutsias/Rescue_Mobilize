@@ -31,6 +31,26 @@
 --   10
 -- );
 
+/*
+INSERT INTO users (users_id, username, password, name, lastname, phone, country, city, address, zip, role) 
+VALUES(
+    1,
+    "admin1",
+    "admin1!",
+    "Petros",
+    "Dhmiakos",
+    "6911111111",
+    "Patras",
+    "Pantanashs",
+    "10",
+    "26224",
+    admin
+    );
+*/
+
+
+
+
 -- PARADEIGMATA GIA THN FORMA
 -- CITIZEN: username: user, password: user, name: user, lastname: user, phone: 1111111111, country: user, city: user, address: user, zip: 11111 
 -- RESCUER: username: rescuer, password: rescuer, name: rescuer, lastname: rescuer, latitude: 38.246229, longtitude: 21.735412, car_name: carname 

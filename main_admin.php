@@ -29,13 +29,38 @@
     }
     #map { 
       height: 90%;
-      margin-top: 20px;
+      margin-top: 0px;
+      
     }
     button{
-      height: 10%;
+      height: 50px;
+      background: white;
+      text-align: center;
+      width: 120px;
+      padding: 5px;
+      font-size: 20px;
+      font-weight: bold;
+      color: #0082e6;
+      border-radius: 10px;
+      cursor: pointer;
     }
     .navbar{
-      /* Place CSS for navigation bar here */
+      background: #0082e6;
+      height: 80px;
+      width: 100%;
+    }
+    nav ul li {
+      display: inline-block;
+      line-height: 50px;
+      margin: 0 60px;
+    }
+    nav ul li a {
+      color: white;
+      font-size: 25px;
+    }
+    ul {
+      position: fixed;
+      text-align: center;
     }
   </style>    
   </head>
@@ -43,23 +68,23 @@
 
   <nav class="navbar">
     <ul>
+        <li><a href="#">Home</a></li>
+        <!-- Page for rescuer registration -->
+        <li><a href="signup_rescuer.php">Create a Rescuer account</a></li>
+          <!-- Page for adding new categories in database -->
+        <li><a href="insert_category.php">Insert categories</a></li>
+        <!--  Page for adding new items in database -->
+        <li><a href="insert_item.php">Insert items</a></li>
+        <!-- Page for altering quantities of items in database -->
+        <li><a href="item_quantity.php">Change quantity of items here</a></li>
+        <li><a href="create_news.php">Create news</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Contact</a></li>
         <li>
           <form action="includes/logout.php" method="post" id="login-form">
           <button type="submit" id="logout-button" name="logout-submit">Logout</button>
           </form>
         </li>
-        <!-- Page for rescuer registration -->
-        <li><a href="signup_rescuer.php">Create a Rescuer account.</a></li>
-          <!-- Page for adding new categories in database -->
-        <li><a href="insert_category.php">Insert categories.</a></li>
-        <!--  Page for adding new items in database -->
-        <li><a href="insert_item.php">Insert items.</a></li>
-        <!-- Page for altering quantities of items in database -->
-        <li><a href="item_quantity.php">Change quantity of items here.</a></li>
-        <li><a href="create_news.php">Create news.</a></li>
-        <li><a href="#">Home</a></li>
-        <li><a href="#">About</a></li>
-        <li><a href="#">Contact</a></li>
     </ul>
   </nav>  
     
