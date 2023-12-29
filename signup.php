@@ -1,156 +1,167 @@
 <?php
-  require "config.php";
-?>
+//  PHP script for the Register form to insert citizen submissions in the database 
 
-<?php
-  // Error Handling
-  $fullUrl = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-?>
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Login Page</title>
-  <link rel="stylesheet" href="LoginCSS.css">
-  <style>
-    p{
-      color: red;
+  require "database.php";
+
+  // Create variables of submited items
+  $username = $_POST['username'];
+  $password = $_POST['password'];
+  $name = $_POST['name'];
+  $lastname = $_POST['lastname'];
+  $phone = $_POST['phone'];
+  $address = $_POST['address'];
+  $zip = $_POST['zip'];
+  $city = $_POST['city'];
+  $country = $_POST['country'];
+
+    // Validate submitted items
+    if(!preg_match("/^[a-zA-Z0-9_.\s]{1,20}$/", $username)){
+      header('Content-Type: application/json');
+      echo json_encode(['success' => false, 'message' => 'Username needs to have alphanumeric characters and _ symbols only, up to 20 characters']);
+      exit();
     }
-  </style>
-</head>
-<body>
-
-  <div class="login-container">
-    <h2>Sign up!</h2>
-
-    <form action="includes/register_citizen.php" method="post" id="login-form">
-      
-      <div class="form-group">
-        <label for="username">Username</label>
-        <input type="text" id="username" name="username" required>
-      </div>
-
-      <?php
-          if(strpos($fullUrl, "signup=wrongusername") == true){
-            echo '<p>Username needs to have alphanumeric characters and _ symbols only, up to 20 characters</p>';
-          }
-      ?>
-      
-      <div class="form-group">
-        <label for="password">Password</label>
-        <input type="password" id="password" name="password" required>
-      </div>
-
-      <?php
-          if(strpos($fullUrl, "signup=invalidpassword") == true){
-            echo '<p>Password needs to have alphanumeric characters and ! or _ symbols only</p>';
-          }
-      ?>
-      
-      <div class="form-group">
-        <label>Name</label>
-        <input type="text" id="name" name="name" required>
-      </div>
-
-      <?php
-          if(strpos($fullUrl, "signup=invalidname") == true){
-            echo '<p>Names can only be written in lower and uppercase letters</p>';
-          }
-      ?>
-        
-      <div class="form-group">
-        <label>Lastname</label>
-        <input type="text" id="lastname" name="lastname" required>
-      </div>
-        
-      <?php
-        if(strpos($fullUrl, "signup=invalidlastname") == true){
-          echo '<p>Lastnames can only be written in lower and uppercase letters</p>';
-        }
-      ?>    
-
-      <div class="form-group">
-        <label>Phone</label>
-        <input type="text" id="phone" name="phone" required>
-      </div>
-        
-      <?php
-        if(strpos($fullUrl, "signup=invalidphone") == true){
-          echo '<p>This is not a phone number</p>';
-        }
-      ?>    
-
-      <div class="form-group">
-        <label>Country</label>
-        <input type="text" id="country" name="country" required>
-      </div>
-      
-      <?php
-        if(strpos($fullUrl, "signup=invalidcountry") == true){
-          echo '<p>This is not a country</p>';
-        }
-      ?>
-
-      <div class="form-group">
-        <label>City</label>
-        <input type="text" id="city" name="city" required>
-      </div>
-        
-      <?php
-        if(strpos($fullUrl, "signup=invalidcity") == true){
-          echo '<p>This is not a city</p>';
-        }
-      ?>    
-
-      <div class="form-group">
-        <label>Address</label>
-        <input type="text" id="address" name="address" required>
-      </div>
-        
-      <?php
-        if(strpos($fullUrl, "signup=invalidaddress") == true){
-          echo '<p>This is not an address</p>';
-        }
-      ?>    
-
-      <div class="form-group">
-        <label>Zip</label>
-        <input type="text" id="zip" name="zip" required>
-      </div>
-
-      <?php
-        if(strpos($fullUrl, "signup=invalidzip") == true){
-          echo '<p>This is not a zip code</p>';
-        }
-      ?>    
-
-      <button type="submit" name="signup-submit" id="submit-button" onclick="FieldsTest()">Register</button>
-      
-    </form>
+    elseif(!preg_match("/^[a-zA-Z0-9!_]*$/", $password)){
+      header('Content-Type: application/json');
+      echo json_encode(['success' => false, 'message' => 'Password needs to have alphanumeric characters and ! or _ symbols only']);
+      exit();
+    }
+    elseif(!preg_match("/^[a-zA-Z.\s]*$/", $name)){
+      header('Content-Type: application/json');
+      echo json_encode(['success' => false, 'message' => 'Names can only be written in lower and uppercase letters']);
+      exit();
+    }
+    elseif(!preg_match("/^[a-zA-Z.\s]*$/", $lastname)){
+      header('Content-Type: application/json');
+      echo json_encode(['success' => false, 'message' => 'Lastnames can only be written in lower and uppercase letters']);
+      exit();
+    }    
+    elseif(!preg_match("/^[0-9]{10}$/", $phone)){
+      header('Content-Type: application/json');
+      echo json_encode(['success' => false, 'message' => 'This is not a phone number']);
+      exit();
+    } 
+    elseif(!preg_match("/^[a-zA-Z\s]*$/", $country)){
+      header('Content-Type: application/json');
+      echo json_encode(['success' => false, 'message' => 'This is not a country']);
+      exit();
+    }
+    elseif(!preg_match("/^[a-zA-Z\s]*$/", $city)){
+      header('Content-Type: application/json');
+      echo json_encode(['success' => false, 'message' => 'This is not a city']);
+      exit();
+    }
+    elseif(!preg_match("/^[a-zA-Z\s,.'0-9]*$/", $address)){
+      header('Content-Type: application/json');
+      echo json_encode(['success' => false, 'message' => 'This is not an address']);
+      exit();
+    } 
+    elseif(!preg_match("/^[0-9]{5}$/", $zip)){
+      header('Content-Type: application/json');
+      echo json_encode(['success' => false, 'message' => 'This is not a zip code']);
+      exit();
+    }
     
-    <?php
-        if(strpos($fullUrl, "error=sqlerror") == true){
-          echo '<p>There was an SQL error</p>';
-        }
-        elseif(strpos($fullUrl, "signup=empty") == true){
-          echo '<p>You did not fill in all fields!</p>';
-        }
-        elseif(strpos($fullUrl, "error=usernamephonetaken") == true){
-          echo '<p>This username is taken, or phone number already exists</p>';
-        }
-    ?>
+    
+    // Sanitization techniques: filtering malicious script
+    $username = filter_input(INPUT_POST, "username", FILTER_SANITIZE_SPECIAL_CHARS);
+    $password = filter_input(INPUT_POST, "password", FILTER_SANITIZE_SPECIAL_CHARS);
+    $name = filter_input(INPUT_POST, "name", FILTER_SANITIZE_SPECIAL_CHARS);
+    $lastname = filter_input(INPUT_POST, "lastname", FILTER_SANITIZE_SPECIAL_CHARS);
+    $phone = filter_input(INPUT_POST, "phone", FILTER_SANITIZE_SPECIAL_CHARS);
+    $city = filter_input(INPUT_POST, "city", FILTER_SANITIZE_SPECIAL_CHARS);      
+    $country = filter_input(INPUT_POST, "country", FILTER_SANITIZE_SPECIAL_CHARS);      
+    $address = filter_input(INPUT_POST, "address", FILTER_SANITIZE_SPECIAL_CHARS);
+    $zip = filter_input(INPUT_POST, "zip", FILTER_SANITIZE_SPECIAL_CHARS);      
+          
+    // Checking for unique username and phone
+    $sql = "SELECT username, phone FROM users WHERE username = ? AND phone = ?";
+    // Create prepared statement
+    // Initialise connection with the database
+    $stmt = mysqli_stmt_init($conn);
+    // Prepare the statement using the $sql query
+    if (!mysqli_stmt_prepare($stmt, $sql)) {
+      header('Content-Type: application/json');
+      echo json_encode(['success' => false, 'message' => 'There was an SQL error']);
+      exit();
+    } 
+    else {
+      // Bind the placeholder "?" parameters to the statement stmt 
+      // s = string, i = integer, b = BLOB, d = double
+      mysqli_stmt_bind_param($stmt, "ss", $username, $phone);
+      // Execute the statement inside the database
+      mysqli_stmt_execute($stmt);
+      // Store the result we got from the database and store it into the $stmt
+      mysqli_stmt_store_result($stmt);
+      // Check the Count of results (number of rows in the database) the $stmt has found
+      $resultCheck = mysqli_stmt_num_rows($stmt);
+      // If more than 0 usernames exist, username is not unique
+      if ($resultCheck > 0) {
+        header('Content-Type: application/json');
+        echo json_encode(['success' => false, 'message' => 'Username or phone is already taken']);
+        exit();
+      }
+    }
 
+    // Create a citizen user
 
-    <p id="error-message" class="error-message"></p>
+    // Hash password for password integrity in the database
+    $hash = password_hash($password, PASSWORD_DEFAULT);
+    
+    // Set role citizen
+    $role = "citizen";
+
+    // First insert values in users table
+    // SQL query
+    $sql = "INSERT INTO users (username, password, name, lastname, phone, country, city ,address, zip, role) 
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);"; 
+
+    // Create prepared statement
+    // Initialise connection with the database
+    $stmt = mysqli_stmt_init($conn);
+    // Prepare the statement using the $sql query
+    if (!mysqli_stmt_prepare($stmt, $sql)) {
+      header('Content-Type: application/json');
+      echo json_encode(['success' => false, 'message' => 'There was an SQL error']);
+      exit();
+    } else {
+      // Bind the placeholder "?" parameters to the statement stmts 
+      // s = string, i = integer, b = BLOB, d = double
+      mysqli_stmt_bind_param($stmt, "ssssssssss", $username, $hash, $name, $lastname, $phone, $country, $city, $address, $zip, $role);
+      // Execute the statement inside the database
+      mysqli_stmt_execute($stmt);
+    
+      // Get the last inserted user_id
+      $last_inserted_id = mysqli_insert_id($conn);
+
+      // Last insert values in citizen table with last inserted_id
+      // SQL query
+      $sql = " INSERT INTO citizen (citizen_id) 
+      VALUES (?);";
+
+      // Create prepared statement
+      // Initialise connection with the database
+      $stmt = mysqli_stmt_init($conn);
+      // Prepare the statement using the $sql query
+      if (!mysqli_stmt_prepare($stmt, $sql)) {
+        header('Content-Type: application/json');
+        echo json_encode(['success' => false, 'message' => 'There was an SQL error']);
+        exit();
+      } 
+      else {
+        // Bind the placeholder "?" parameters to the statement stmts 
+        // s = string, i = integer, b = BLOB, d = double
+        mysqli_stmt_bind_param($stmt, "i", $last_inserted_id);
+        // Execute the statement inside the database
+        mysqli_stmt_execute($stmt);
+      }
+
+      header('Content-Type: application/json');
+      echo json_encode(['success' => true, 'message' => 'Signup successful', 'redirect' => 'login.html']);
+      exit();
+    }
   
-  </div>
-
-  <script src="SignUpJS.js"></script>
-
-</body>
-</html>
-
-
-
-        
+  mysqli_stmt_close($stmt);
+  mysqli_close($conn);  
+}
