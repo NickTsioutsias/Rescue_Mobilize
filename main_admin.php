@@ -3,7 +3,7 @@
   require "config.php";
   // If we are not logged in stuff happens here
   if ($_SESSION['role'] != 'admin') {
-    header("Location: index.php");
+    header("Location: index.php");  
     exit();
   }
 ?>
@@ -23,70 +23,83 @@
       crossorigin="">
   </script>
   <style>
-    html,body{
-      height: 100%;
+    p{
+      color: red;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      /* containers should be in rows */
+      flex-direction: column;
+      justify-content: space-between;
       margin: 0;
+      height: 100vh; /* Make sure the body takes the full viewport height */
     }
-    #map { 
-      height: 90%;
-      margin-top: 0px;
-      
+    #nav-container {
+      /* form should take a third of the page */
+      width: 30%;
+      padding: 20px;
     }
-    button{
-      height: 50px;
-      background: white;
-      text-align: center;
-      width: 120px;
-      padding: 5px;
-      font-size: 20px;
-      font-weight: bold;
-      color: #0082e6;
-      border-radius: 10px;
-      cursor: pointer;
+
+    #map-container {
+      /* map should take rest of page */
+      flex: 1;
     }
-    .navbar{
-      background: #0082e6;
-      height: 80px;
+
+    #map {
+      height: 100%;
       width: 100%;
     }
-    nav ul li {
-      display: inline-block;
-      line-height: 50px;
-      margin: 0 60px;
+    button{
+      height: 10%;
     }
-    nav ul li a {
-      color: white;
-      font-size: 25px;
+    .navbar{
+      /* Place CSS for navigation bar here */
+      display: flex;
+      flex-direction: column;
     }
     ul {
-      position: fixed;
-      text-align: center;
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap; /* Enable wrapping for multiple columns */
+      justify-content: space-around;
     }
+    .custom-marker {
+    display: inline-block;
+}
+
+  .marker-dot {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+  }
   </style>    
   </head>
   <body>
-
+  <div id="nav_container">
   <nav class="navbar">
     <ul>
-        <li><a href="#">Home</a></li>
-        <!-- Page for rescuer registration -->
-        <li><a href="signup_rescuer.php">Create a Rescuer account</a></li>
-          <!-- Page for adding new categories in database -->
-        <li><a href="insert_category.php">Insert categories</a></li>
-        <!--  Page for adding new items in database -->
-        <li><a href="insert_item.php">Insert items</a></li>
-        <!-- Page for altering quantities of items in database -->
-        <li><a href="item_quantity.php">Change quantity of items here</a></li>
-        <li><a href="create_news.php">Create news</a></li>
-        <li><a href="#">About</a></li>
-        <li><a href="#">Contact</a></li>
         <li>
-          <form action="includes/logout.php" method="post" id="login-form">
+          <form id="logout-form">
           <button type="submit" id="logout-button" name="logout-submit">Logout</button>
           </form>
         </li>
+        <!-- Page for rescuer registration -->
+        <li><a href="signup_rescuer.php">Create a Rescuer account.</a></li>
+          <!-- Page for adding new categories in database -->
+        <li><a href="insert_category.php">Insert categories.</a></li>
+        <!--  Page for adding new items in database -->
+        <li><a href="insert_item.php">Insert items.</a></li>
+        <!-- Page for altering quantities of items in database -->
+        <li><a href="item_quantity.php">Change quantity of items here.</a></li>
+        <li><a href="create_news.php">Create news.</a></li>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Contact</a></li>
     </ul>
-  </nav>  
+  </nav>
+  </div>
+    
     
 
   
@@ -101,12 +114,110 @@
     maxZoom: 19,
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }).addTo(map);
+    // Declare marker globally to make it accessible in other functions
+    let marker;
+
+
+// Get base coordinates from database
+let xhr2 = new XMLHttpRequest();
+xhr2.open('GET', 'includes/base_to_json.php', true);
+xhr2.setRequestHeader('Content-type', 'application/json');
+
+xhr2.onload = function () {
+    
+    // Create marker function
+    function createAndBindMarker(lat, lng) {
+        marker = L.marker([lat, lng], { draggable: true }).addTo(map);
+        marker.bindPopup('<b>Base.</b>').openPopup();
+
+        // Store the original position
+        let originalPosition = marker.getLatLng();
+        // Click and Drag function
+        marker.on('dragend', function (event) {
+            let currentPosition = event.target.getLatLng();
+            let confirmation = confirm('Do you want to change the Base coordinates?');
+            if (confirmation) {
+              // Store new Base location in database
+              insertIntoDatabase(currentPosition.lat, currentPosition.lng);
+            } else {
+                // Revert the marker position to the original position
+                event.target.setLatLng(originalPosition);
+            }
+        });
+    }
+
+    if (xhr2.status == 200) {
+        let jsonData = JSON.parse(this.responseText);
+        createAndBindMarker(jsonData[0].lat, jsonData[0].lng);
+    }
+};
+xhr2.send();
+
+// Function to insert coordinates into the database
+function insertIntoDatabase(latitude, longitude) {
+  let xhr3 = new XMLHttpRequest();
+  xhr3.open('POST', 'includes/new_base_loc.inc.php', true);
+  xhr3.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+  xhr3.onload = function(){
+    if(xhr3.status == 200){
+      console.log(this.responseText);
+      response = JSON.parse(this.responseText);
+      if(response.success){
+        marker.setLatLng(marker.getLatLng());
+      }
+      else{
+        console.log('Error');
+      }
+    }
+  };
+  xhr3.send('latitude=' + latitude + '&longitude=' + longitude);
+}
+
+
+// Get resquers coordinates from database
+let xhr4 = new XMLHttpRequest();
+xhr4.open('GET', 'includes/rescuer_to_json.php', true);
+xhr4.setRequestHeader('Content-type', 'application/json');
+
+xhr4.onload = function(){
+  if(xhr4.status == 200){
+    let response = JSON.parse(this.responseText);
+    response.forEach(function(item){
+      let carName = item.car_name;
+      let lng = item.lng;
+      let lat = item.lat;
+      let currTask = item.curr_task;
+      console.log("Car Name: " + carName + ", Longitude: " + lng + ", Latitude: " + lat);
+      rescuerMarker = L.marker([lat, lng], {icon: L.divIcon({
+                className: 'custom-marker',
+                html: '<div style="background-color: red;" class="marker-dot"></div>',
+                iconSize: [20, 20], // Adjust the size if needed
+                iconAnchor: [10, 10] // Adjust the anchor point if needed
+            }), draggable: true}).addTo(map);
+      rescuerMarker.bindPopup('<b>Car Name:' + carName + '.</b><br><b>Tasks:' + currTask + '</b>').openPopup();
+    });
+    // marker = L.marker([jsonData[0].lat, jsonData[0].lng], {draggable: true}).addTo(map);
+    // marker.bindPopup('<b>Base.</b>').openPopup();
+  }
+
+};
+xhr4.send();
+
+
 
     // Make marker location
-    var marker = L.marker([38.2463673403233, 21.735140649945635]).addTo(map);
+    // let marker = L.marker([38.2463673403233, 21.735140649945635], {draggable: true}).addTo(map);
 
-    // Make marker popup
-    marker.bindPopup("<b>Citizen name</b><br><b>Citizen lastname</b><br><b>Citizen phone</b><br><b>Citizen lastname</b><br>.").openPopup();
+    // marker.on('dragend', function(event){
+    //   let marker = event.target;
+    //   let position = marker.getLatLng();
+
+    //   // Update the content of the popup with the new coordinates
+    //  marker.bindPopup('Marker Position: ' + position.toString()).openPopup();
+    // });
+    // // Make marker popup
+    // marker.bindPopup('<b>Base</b><br>' + marker.getLatLng() + '.').openPopup();
 
     
 
@@ -117,10 +228,12 @@
 
   <script>
     map.on('click', function (e) {
-      var coordinates = e.latlng;
+      let coordinates = e.latlng;
       alert("Coordinates: " + coordinates.lat + ", " + coordinates.lng);
     });
   </script>
+
+  <div id='message'></div>
     
 <?php
   // Error Handling
@@ -132,9 +245,14 @@
   elseif(strpos($fullUrl, "signup=success") == true){
     echo "Hooray! You Signed up!";
   }
+  elseif(strpos($fullUrl, "signupcategory=success") == true){
+    echo "Hooray! You created a category";
+  }
   elseif(strpos($fullUrl, "signup=invalidcarname") == true){
     echo "Invalid car name";
   }
+  
 ?>
+<script src="main_admin.js"></script>
 </body>
 </html>
