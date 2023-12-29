@@ -48,6 +48,8 @@ VALUES(
     );
 */
 
+-- INSERT INTO base VALUES (POINT(21.735140, 38.246367));
+
 
 
 

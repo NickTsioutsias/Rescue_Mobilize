@@ -55,7 +55,6 @@ CREATE TABLE category(
 CREATE TABLE inventory(
   id INT NOT NULL AUTO_INCREMENT,
   name VARCHAR(50) NOT NULL,
-  description TEXT,
   quantity INT DEFAULT 0,
   categ_id INT NOT NULL,
   PRIMARY KEY(id),
@@ -155,4 +154,8 @@ CREATE TABLE donation(
   REFERENCES rescuer(resc_id)
   ON DELETE CASCADE
   ON UPDATE CASCADE
+);
+
+CREATE TABLE base(
+    base_cords POINT NOT NULL
 );
