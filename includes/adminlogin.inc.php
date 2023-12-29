@@ -5,6 +5,14 @@
     $username = $_POST['username'];
     $password = $_POST['password'];
 
+  // Validate inputs on the server side
+  if (empty($username) || empty($password)) {
+    echo 'Please enter both username and password.';
+  } 
+  
+  // Sanitize inputs
+  $username = filter_input(INPUT_POST, "username", FILTER_SANITIZE_SPECIAL_CHARS);
+  $password = filter_input(INPUT_POST, "password", FILTER_SANITIZE_SPECIAL_CHARS);
 
     
       // Select username which corresponds to the submitted username
