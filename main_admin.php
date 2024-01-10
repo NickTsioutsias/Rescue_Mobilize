@@ -57,6 +57,7 @@
       /* Place CSS for navigation bar here */
       display: flex;
       flex-direction: column;
+      /* background-color: #007bff; */
     }
     ul {
       list-style: none;
@@ -64,6 +65,13 @@
       flex-wrap: wrap; /* Enable wrapping for multiple columns */
       justify-content: space-around;
     }
+    /* .navbar a{
+      background-color: #007bff;
+      color: white;
+      padding: 14px 25px;
+      text-align: center;
+      text-decoration: none;
+    } */
     .custom-marker {
     display: inline-block;
 }

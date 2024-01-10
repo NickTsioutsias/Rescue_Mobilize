@@ -61,31 +61,3 @@ xhr.onload = function(){
 };
 // Send as associative arrays
 xhr.send();
-
-// Change quantity
-document.getElementById('quantity-form').addEventListener('submit', function(event){
-  event.preventDefault();
-
-  let quantity = document.getElementById('quantity').value;
-  let item = document.getElementById('autocomplete').value;
-
-  let xhr = new XMLHttpRequest();
-  xhr.open('POST', 'includes/quantity.inc.php', true);
-  xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-
-  xhr.onload = function(){
-    if(xhr.status == 200){
-      console.log(this.responseText);
-      // Get response as JSON data
-      let response = JSON.parse(this.responseText);
-      document.getElementById('message').innerHTML = response.message;
-
-      if(response.success){
-        // Redirect or perform other actions after successfull sigunp
-        window.location.href = response.redirect;
-      }
-    }
-  };
-// Send as associative arrays to signup.php
-xhr.send('quantity=' + quantity + '&item=' + item);  
-});

@@ -20,7 +20,3 @@ document.getElementById('logout-form').addEventListener('submit', function(event
 // Send as associative arrays to logout.php
 xhr1.send();
 }); 
-
-
-
-

@@ -1,9 +1,7 @@
 <?php
-  require "database.php";
   require "config.php";
-  // If we are not logged in stuff happens here
-  if ($_SESSION['role'] != 'admin') {
-    header("Location: index.php");  
+  if($_SESSION['role'] != 'citizen'){
+    header("Location: index.php");
     exit();
   }
 ?>
@@ -13,7 +11,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Item quantity</title>
+  <title>Document</title>
   <link rel="stylesheet" href="LoginCSS.css">
   <style>
   #autocomplete-results {
@@ -48,7 +46,7 @@
 <body>
   <div class="login-container">
     <form id="quantity-form">
-      <h2>Change quantity of items!</h2>
+      <h2>Create Requests</h2>
 
       <button type="submit" id="submit-button" name="submit-button">Submit</button>
 
@@ -68,6 +66,6 @@
 
   </div>
 
-<script src="quantity.js"></script>
+<script src="request.js"></script>
 </body>
 </html>

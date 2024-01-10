@@ -1,0 +1,54 @@
+[
+    {
+        "users_id": 1,
+        "username": "user",
+        "password": "$2y$10$HN5OttSXgp6bpM7yX\/w8\/.T1mJaCSF5e.hlC\/FPBvSDVqbmy13qYe",
+        "name": "user",
+        "lastname": "user",
+        "phone": "1111111111",
+        "country": "user",
+        "city": "user",
+        "address": "user",
+        "zip": "16344",
+        "role": "citizen"
+    },
+    {
+        "users_id": 9,
+        "username": "citizen",
+        "password": "$2y$10$rx2Yv5auuusAm8BFcn.IfufML65S\/ZUJoNYL2VM8Vx9A4fKx5wq7S",
+        "name": "citizen",
+        "lastname": "citizen",
+        "phone": "2222222222",
+        "country": "citizen",
+        "city": "citizen",
+        "address": "citizen",
+        "zip": "16344",
+        "role": "citizen"
+    },
+    {
+        "users_id": 14,
+        "username": "yochanan_",
+        "password": "$2y$10$IXFkraXLYIJl\/4jKQHK.oetNHxeR3wsKgGneP5QZW.m\/crk\/EbyF6",
+        "name": "Ioanna",
+        "lastname": "Mpakali",
+        "phone": "6944980253",
+        "country": "Greece",
+        "city": "Patras",
+        "address": "Ioanninion 39",
+        "zip": "26223",
+        "role": "citizen"
+    },
+    {
+        "users_id": 30,
+        "username": "p",
+        "password": "$2y$10$D3VGRGHc4CVgi5Ki5YNllOtTMTLxl99koVylVOVW2xVGSesQfzaxO",
+        "name": "p",
+        "lastname": "p",
+        "phone": "2222222222",
+        "country": "p",
+        "city": "p",
+        "address": "p",
+        "zip": "16344",
+        "role": "citizen"
+    }
+]

@@ -1,1 +1,37 @@
-[]
+[
+    {
+        "resc_id": 39,
+        "curr_task": 0,
+        "lng": 21.732301,
+        "lat": 38.244334,
+        "car_name": "rescuercar"
+    },
+    {
+        "resc_id": 40,
+        "curr_task": 0,
+        "lng": 21.738201,
+        "lat": 38.248731,
+        "car_name": "rescuerr"
+    },
+    {
+        "resc_id": 41,
+        "curr_task": 0,
+        "lng": 21.736978,
+        "lat": 38.244907,
+        "car_name": "rescuercarrrr"
+    },
+    {
+        "resc_id": 42,
+        "curr_task": 0,
+        "lng": 21.740132,
+        "lat": 38.251662,
+        "car_name": "rescuerrrrr"
+    },
+    {
+        "resc_id": 43,
+        "curr_task": 0,
+        "lng": 21.732602,
+        "lat": 38.24767,
+        "car_name": "r"
+    }
+]

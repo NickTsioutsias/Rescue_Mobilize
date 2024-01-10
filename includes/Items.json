@@ -1,0 +1,854 @@
+[
+    {
+        "id": 16,
+        "name": "Water",
+        "quantity": 5,
+        "categ_id": 6
+    },
+    {
+        "id": 17,
+        "name": "Orange juice",
+        "quantity": 0,
+        "categ_id": 6
+    },
+    {
+        "id": 18,
+        "name": "Sardines",
+        "quantity": 0,
+        "categ_id": 5
+    },
+    {
+        "id": 19,
+        "name": "Canned corn",
+        "quantity": 0,
+        "categ_id": 5
+    },
+    {
+        "id": 20,
+        "name": "Bread",
+        "quantity": 0,
+        "categ_id": 5
+    },
+    {
+        "id": 21,
+        "name": "Chocolate",
+        "quantity": 0,
+        "categ_id": 5
+    },
+    {
+        "id": 22,
+        "name": "Men Sneakers",
+        "quantity": 0,
+        "categ_id": 7
+    },
+    {
+        "id": 23,
+        "name": "Test Product",
+        "quantity": 0,
+        "categ_id": 9
+    },
+    {
+        "id": 24,
+        "name": "Test Val",
+        "quantity": 0,
+        "categ_id": 14
+    },
+    {
+        "id": 25,
+        "name": "Spaghetti",
+        "quantity": 0,
+        "categ_id": 5
+    },
+    {
+        "id": 26,
+        "name": "Croissant",
+        "quantity": 0,
+        "categ_id": 5
+    },
+    {
+        "id": 28,
+        "name": "",
+        "quantity": 0,
+        "categ_id": 10
+    },
+    {
+        "id": 29,
+        "name": "Biscuits",
+        "quantity": 0,
+        "categ_id": 5
+    },
+    {
+        "id": 30,
+        "name": "Bandages",
+        "quantity": 0,
+        "categ_id": 16
+    },
+    {
+        "id": 31,
+        "name": "Disposable gloves",
+        "quantity": 0,
+        "categ_id": 16
+    },
+    {
+        "id": 32,
+        "name": "Gauze",
+        "quantity": 0,
+        "categ_id": 16
+    },
+    {
+        "id": 33,
+        "name": "Antiseptic",
+        "quantity": 0,
+        "categ_id": 16
+    },
+    {
+        "id": 34,
+        "name": "First Aid Kit",
+        "quantity": 0,
+        "categ_id": 16
+    },
+    {
+        "id": 35,
+        "name": "Painkillers",
+        "quantity": 0,
+        "categ_id": 16
+    },
+    {
+        "id": 36,
+        "name": "Blanket",
+        "quantity": 0,
+        "categ_id": 7
+    },
+    {
+        "id": 37,
+        "name": "Fakes",
+        "quantity": 0,
+        "categ_id": 5
+    },
+    {
+        "id": 38,
+        "name": "Menstrual Pads",
+        "quantity": 8,
+        "categ_id": 21
+    },
+    {
+        "id": 39,
+        "name": "Tampon",
+        "quantity": 0,
+        "categ_id": 21
+    },
+    {
+        "id": 40,
+        "name": "Toilet Paper",
+        "quantity": 0,
+        "categ_id": 21
+    },
+    {
+        "id": 41,
+        "name": "Baby wipes",
+        "quantity": 0,
+        "categ_id": 21
+    },
+    {
+        "id": 42,
+        "name": "Toothbrush",
+        "quantity": 0,
+        "categ_id": 21
+    },
+    {
+        "id": 43,
+        "name": "Toothpaste",
+        "quantity": 5,
+        "categ_id": 21
+    },
+    {
+        "id": 44,
+        "name": "Vitamin C",
+        "quantity": 0,
+        "categ_id": 16
+    },
+    {
+        "id": 45,
+        "name": "Multivitamines",
+        "quantity": 0,
+        "categ_id": 16
+    },
+    {
+        "id": 46,
+        "name": "Paracetamol",
+        "quantity": 0,
+        "categ_id": 16
+    },
+    {
+        "id": 47,
+        "name": "Ibuprofen",
+        "quantity": 0,
+        "categ_id": 16
+    },
+    {
+        "id": 48,
+        "name": "",
+        "quantity": 0,
+        "categ_id": 10
+    },
+    {
+        "id": 49,
+        "name": "",
+        "quantity": 0,
+        "categ_id": 10
+    },
+    {
+        "id": 50,
+        "name": "",
+        "quantity": 0,
+        "categ_id": 10
+    },
+    {
+        "id": 51,
+        "name": "Cleaning rag",
+        "quantity": 0,
+        "categ_id": 22
+    },
+    {
+        "id": 52,
+        "name": "Detergent",
+        "quantity": 0,
+        "categ_id": 22
+    },
+    {
+        "id": 53,
+        "name": "Disinfectant",
+        "quantity": 0,
+        "categ_id": 22
+    },
+    {
+        "id": 54,
+        "name": "Mop",
+        "quantity": 0,
+        "categ_id": 22
+    },
+    {
+        "id": 55,
+        "name": "Plastic bucket",
+        "quantity": 0,
+        "categ_id": 22
+    },
+    {
+        "id": 56,
+        "name": "Scrub brush",
+        "quantity": 0,
+        "categ_id": 22
+    },
+    {
+        "id": 57,
+        "name": "Dust mask",
+        "quantity": 0,
+        "categ_id": 22
+    },
+    {
+        "id": 58,
+        "name": "Broom",
+        "quantity": 0,
+        "categ_id": 22
+    },
+    {
+        "id": 59,
+        "name": "Hammer",
+        "quantity": 0,
+        "categ_id": 23
+    },
+    {
+        "id": 60,
+        "name": "Skillsaw",
+        "quantity": 0,
+        "categ_id": 23
+    },
+    {
+        "id": 61,
+        "name": "Prybar",
+        "quantity": 0,
+        "categ_id": 23
+    },
+    {
+        "id": 62,
+        "name": "Shovel",
+        "quantity": 0,
+        "categ_id": 23
+    },
+    {
+        "id": 63,
+        "name": "Flashlight",
+        "quantity": 0,
+        "categ_id": 23
+    },
+    {
+        "id": 64,
+        "name": "Duct tape",
+        "quantity": 0,
+        "categ_id": 23
+    },
+    {
+        "id": 65,
+        "name": "Underwear",
+        "quantity": 0,
+        "categ_id": 7
+    },
+    {
+        "id": 66,
+        "name": "Socks",
+        "quantity": 0,
+        "categ_id": 7
+    },
+    {
+        "id": 67,
+        "name": "Warm Jacket",
+        "quantity": 0,
+        "categ_id": 7
+    },
+    {
+        "id": 68,
+        "name": "Raincoat",
+        "quantity": 0,
+        "categ_id": 7
+    },
+    {
+        "id": 69,
+        "name": "Gloves",
+        "quantity": 0,
+        "categ_id": 7
+    },
+    {
+        "id": 70,
+        "name": "Pants",
+        "quantity": 0,
+        "categ_id": 7
+    },
+    {
+        "id": 71,
+        "name": "Boots",
+        "quantity": 0,
+        "categ_id": 7
+    },
+    {
+        "id": 72,
+        "name": "Dishes",
+        "quantity": 0,
+        "categ_id": 24
+    },
+    {
+        "id": 73,
+        "name": "Pots",
+        "quantity": 0,
+        "categ_id": 24
+    },
+    {
+        "id": 74,
+        "name": "Paring knives",
+        "quantity": 0,
+        "categ_id": 24
+    },
+    {
+        "id": 75,
+        "name": "Pan",
+        "quantity": 0,
+        "categ_id": 24
+    },
+    {
+        "id": 76,
+        "name": "Glass",
+        "quantity": 0,
+        "categ_id": 24
+    },
+    {
+        "id": 77,
+        "name": "",
+        "quantity": 0,
+        "categ_id": 10
+    },
+    {
+        "id": 78,
+        "name": "",
+        "quantity": 0,
+        "categ_id": 10
+    },
+    {
+        "id": 79,
+        "name": "",
+        "quantity": 0,
+        "categ_id": 10
+    },
+    {
+        "id": 80,
+        "name": "",
+        "quantity": 0,
+        "categ_id": 10
+    },
+    {
+        "id": 81,
+        "name": "",
+        "quantity": 0,
+        "categ_id": 10
+    },
+    {
+        "id": 82,
+        "name": "",
+        "quantity": 0,
+        "categ_id": 10
+    },
+    {
+        "id": 83,
+        "name": "t22",
+        "quantity": 0,
+        "categ_id": 9
+    },
+    {
+        "id": 84,
+        "name": "water ",
+        "quantity": 5,
+        "categ_id": 6
+    },
+    {
+        "id": 85,
+        "name": "Coca Cola",
+        "quantity": 0,
+        "categ_id": 6
+    },
+    {
+        "id": 86,
+        "name": "spray",
+        "quantity": 0,
+        "categ_id": 26
+    },
+    {
+        "id": 87,
+        "name": "Outdoor spiral",
+        "quantity": 0,
+        "categ_id": 26
+    },
+    {
+        "id": 88,
+        "name": "Baby bottle",
+        "quantity": 0,
+        "categ_id": 25
+    },
+    {
+        "id": 89,
+        "name": "Pacifier",
+        "quantity": 0,
+        "categ_id": 25
+    },
+    {
+        "id": 90,
+        "name": "Condensed milk",
+        "quantity": 0,
+        "categ_id": 5
+    },
+    {
+        "id": 91,
+        "name": "Cereal bar",
+        "quantity": 0,
+        "categ_id": 5
+    },
+    {
+        "id": 92,
+        "name": "Pocket Knife",
+        "quantity": 0,
+        "categ_id": 23
+    },
+    {
+        "id": 93,
+        "name": "Water Disinfection Tablets",
+        "quantity": 0,
+        "categ_id": 16
+    },
+    {
+        "id": 94,
+        "name": "Radio",
+        "quantity": 0,
+        "categ_id": 27
+    },
+    {
+        "id": 95,
+        "name": "Kitchen appliances",
+        "quantity": 0,
+        "categ_id": 14
+    },
+    {
+        "id": 96,
+        "name": "Winter hat",
+        "quantity": 0,
+        "categ_id": 28
+    },
+    {
+        "id": 97,
+        "name": "Winter gloves",
+        "quantity": 0,
+        "categ_id": 28
+    },
+    {
+        "id": 98,
+        "name": "Scarf",
+        "quantity": 0,
+        "categ_id": 28
+    },
+    {
+        "id": 99,
+        "name": "Thermos",
+        "quantity": 0,
+        "categ_id": 28
+    },
+    {
+        "id": 100,
+        "name": "Tea",
+        "quantity": 0,
+        "categ_id": 6
+    },
+    {
+        "id": 101,
+        "name": "Dog Food ",
+        "quantity": 0,
+        "categ_id": 29
+    },
+    {
+        "id": 102,
+        "name": "Cat Food",
+        "quantity": 0,
+        "categ_id": 29
+    },
+    {
+        "id": 103,
+        "name": "Canned",
+        "quantity": 0,
+        "categ_id": 5
+    },
+    {
+        "id": 104,
+        "name": "Chlorine",
+        "quantity": 0,
+        "categ_id": 22
+    },
+    {
+        "id": 105,
+        "name": "Medical gloves",
+        "quantity": 0,
+        "categ_id": 22
+    },
+    {
+        "id": 106,
+        "name": "T-Shirt",
+        "quantity": 0,
+        "categ_id": 7
+    },
+    {
+        "id": 107,
+        "name": "Cooling Fan",
+        "quantity": 0,
+        "categ_id": 34
+    },
+    {
+        "id": 108,
+        "name": "Cool Scarf",
+        "quantity": 0,
+        "categ_id": 34
+    },
+    {
+        "id": 109,
+        "name": "Whistle",
+        "quantity": 0,
+        "categ_id": 23
+    },
+    {
+        "id": 110,
+        "name": "Blankets",
+        "quantity": 0,
+        "categ_id": 28
+    },
+    {
+        "id": 111,
+        "name": "Sleeping Bag",
+        "quantity": 0,
+        "categ_id": 28
+    },
+    {
+        "id": 112,
+        "name": "Toothbrush",
+        "quantity": 0,
+        "categ_id": 21
+    },
+    {
+        "id": 113,
+        "name": "Toothpaste",
+        "quantity": 5,
+        "categ_id": 21
+    },
+    {
+        "id": 114,
+        "name": "Thermometer",
+        "quantity": 0,
+        "categ_id": 16
+    },
+    {
+        "id": 115,
+        "name": "Rice",
+        "quantity": 0,
+        "categ_id": 5
+    },
+    {
+        "id": 116,
+        "name": "Bread",
+        "quantity": 0,
+        "categ_id": 5
+    },
+    {
+        "id": 117,
+        "name": "Towels",
+        "quantity": 0,
+        "categ_id": 22
+    },
+    {
+        "id": 118,
+        "name": "Wet Wipes",
+        "quantity": 0,
+        "categ_id": 22
+    },
+    {
+        "id": 119,
+        "name": "Fire Extinguisher",
+        "quantity": 0,
+        "categ_id": 23
+    },
+    {
+        "id": 120,
+        "name": "Fruits",
+        "quantity": 0,
+        "categ_id": 5
+    },
+    {
+        "id": 121,
+        "name": "Duct Tape",
+        "quantity": 0,
+        "categ_id": 23
+    },
+    {
+        "id": 122,
+        "name": "",
+        "quantity": 0,
+        "categ_id": 10
+    },
+    {
+        "id": 123,
+        "name": "Αθλητικά",
+        "quantity": 0,
+        "categ_id": 19
+    },
+    {
+        "id": 124,
+        "name": "Πασατέμπος",
+        "quantity": 0,
+        "categ_id": 5
+    },
+    {
+        "id": 125,
+        "name": "Bandages",
+        "quantity": 0,
+        "categ_id": 35
+    },
+    {
+        "id": 126,
+        "name": "Betadine",
+        "quantity": 0,
+        "categ_id": 35
+    },
+    {
+        "id": 127,
+        "name": "cotton wool",
+        "quantity": 0,
+        "categ_id": 35
+    },
+    {
+        "id": 128,
+        "name": "Crackers",
+        "quantity": 0,
+        "categ_id": 5
+    },
+    {
+        "id": 129,
+        "name": "Sanitary Pads",
+        "quantity": 0,
+        "categ_id": 21
+    },
+    {
+        "id": 130,
+        "name": "Sanitary wipes",
+        "quantity": 0,
+        "categ_id": 21
+    },
+    {
+        "id": 131,
+        "name": "Electrolytes",
+        "quantity": 0,
+        "categ_id": 16
+    },
+    {
+        "id": 132,
+        "name": "Pain killers",
+        "quantity": 0,
+        "categ_id": 16
+    },
+    {
+        "id": 133,
+        "name": "Flashlight",
+        "quantity": 0,
+        "categ_id": 23
+    },
+    {
+        "id": 134,
+        "name": "Juice",
+        "quantity": 0,
+        "categ_id": 6
+    },
+    {
+        "id": 135,
+        "name": "Toilet Paper",
+        "quantity": 0,
+        "categ_id": 21
+    },
+    {
+        "id": 136,
+        "name": "Sterilized Saline",
+        "quantity": 0,
+        "categ_id": 16
+    },
+    {
+        "id": 137,
+        "name": "Biscuits",
+        "quantity": 0,
+        "categ_id": 5
+    },
+    {
+        "id": 138,
+        "name": "Antihistamines",
+        "quantity": 0,
+        "categ_id": 16
+    },
+    {
+        "id": 139,
+        "name": "Instant Pancake Mix",
+        "quantity": 0,
+        "categ_id": 5
+    },
+    {
+        "id": 140,
+        "name": "Lacta",
+        "quantity": 0,
+        "categ_id": 5
+    },
+    {
+        "id": 141,
+        "name": "Canned Tuna",
+        "quantity": 0,
+        "categ_id": 5
+    },
+    {
+        "id": 142,
+        "name": "Batteries",
+        "quantity": 0,
+        "categ_id": 23
+    },
+    {
+        "id": 143,
+        "name": "Dust Mask",
+        "quantity": 0,
+        "categ_id": 35
+    },
+    {
+        "id": 144,
+        "name": "Can Opener",
+        "quantity": 0,
+        "categ_id": 23
+    },
+    {
+        "id": 145,
+        "name": "",
+        "quantity": 0,
+        "categ_id": 10
+    },
+    {
+        "id": 146,
+        "name": "Πατατάκια",
+        "quantity": 0,
+        "categ_id": 5
+    },
+    {
+        "id": 147,
+        "name": "Σερβιέτες",
+        "quantity": 0,
+        "categ_id": 21
+    },
+    {
+        "id": 148,
+        "name": "Dry Cranberries",
+        "quantity": 0,
+        "categ_id": 5
+    },
+    {
+        "id": 149,
+        "name": "Dry Apricots",
+        "quantity": 0,
+        "categ_id": 5
+    },
+    {
+        "id": 150,
+        "name": "Dry Figs",
+        "quantity": 0,
+        "categ_id": 5
+    },
+    {
+        "id": 151,
+        "name": "Παξιμάδια",
+        "quantity": 0,
+        "categ_id": 5
+    },
+    {
+        "id": 152,
+        "name": "",
+        "quantity": 0,
+        "categ_id": 10
+    },
+    {
+        "id": 153,
+        "name": "Test Item",
+        "quantity": 0,
+        "categ_id": 11
+    },
+    {
+        "id": 154,
+        "name": "Tester",
+        "quantity": 0,
+        "categ_id": 5
+    },
+    {
+        "id": 155,
+        "name": "Testers",
+        "quantity": 0,
+        "categ_id": 5
+    },
+    {
+        "id": 156,
+        "name": "Testerss",
+        "quantity": 0,
+        "categ_id": 5
+    },
+    {
+        "id": 157,
+        "name": "ubly",
+        "quantity": 0,
+        "categ_id": 5
+    },
+    {
+        "id": 158,
+        "name": "Testerssss",
+        "quantity": 0,
+        "categ_id": 5
+    }
+]
