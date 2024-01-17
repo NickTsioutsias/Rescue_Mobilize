@@ -16,7 +16,7 @@ xhr.onload = function(){
     const resultLimit = 5; // Set the maximum number of results to display
 
     // Get the input and results container
-    const input = document.getElementById('autocomplete');
+    const input = document.getElementById('item');
     const resultsContainer = document.getElementById('autocomplete-results');
 
     // Event listener for input changes
@@ -61,3 +61,56 @@ xhr.onload = function(){
 };
 // Send as associative arrays
 xhr.send();
+
+// Logout request
+document.getElementById('logout-form').addEventListener('submit', function(event){
+  event.preventDefault();
+
+  let xhr1 = new XMLHttpRequest();
+  xhr1.open('post', 'includes/logout.php', true);
+  xhr1.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+  xhr1.onload = function(){
+    if(xhr1.status == 200){
+      console.log(this.responseText);
+      // Get response as JSON data
+      let response = JSON.parse(this.responseText);
+      if(response.success){
+        // Redirect 
+        window.location.href = response.redirect;
+      }
+    }
+  };
+// Send as associative arrays to logout.php
+xhr1.send();
+});
+
+// Create request
+document.getElementById('request-form').addEventListener('submit', function(event){
+  event.preventDefault();
+
+  let item = document.getElementById('item').value;
+  let quantity = document.getElementById("quantity").value;
+  let latitude = document.getElementById("latitude").value;
+  let longitude = document.getElementById("longitude").value;
+
+  console.log(item, quantity, latitude, longitude);
+
+  let xhr2 = new XMLHttpRequest();
+  xhr2.open('POST', 'includes/insert_request.inc.php', true);
+  xhr2.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+  xhr2.onload = function(){
+    if(xhr2.status == 200){
+      console.log(this.responseText);
+      // Get response as JSON data
+      let response = JSON.parse(this.responseText);
+      document.getElementById('message').innerHTML = response.message;
+
+      if(response.success){
+        window.location.href = response.redirect;
+      }
+    }
+  };
+xhr2.send('item=' + item + '&quantity=' + quantity + '&latitude=' + latitude + '&longitude=' + longitude);  
+});

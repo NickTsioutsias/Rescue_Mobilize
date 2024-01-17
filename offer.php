@@ -4,6 +4,10 @@
     header("Location: login.html");
     exit();
   }
+
+  if (isset($_GET['announcement'])) {
+    $announcementData = json_decode($_GET['announcement'], true);
+  }
 ?>
 
 <!DOCTYPE html>
@@ -152,19 +156,21 @@ label {
     <div class="flex-container" style="flex-grow: 1; flex-direction: column;">
       
       <div class="login-container">
-        <h3>Create Request!</h3>
-        <form id="request-form">
+        <h3>Create Offer!</h3>
+        <form id="offer-form">
           
           <div class="form-group">
               <label for="item">Item</label>
-              <input type="text" id="item" name="item" autocomplete="off" required>
+              <input type="text" id="item" name="item" autocomplete="off" 
+              value="<?php echo $announcementData['item_name'];?>" disabled required>
           </div>
 
           <div id="autocomplete-results"></div>    
           
           <div class="form-group">
-              <label>People</label>
-              <input type="number" id="quantity" name="quantity" min="1" autocomplete="off" required>
+              <label>Quantity</label>
+              <input type="number" id="quantity" name="quantity" min="1" autocomplete="off" 
+              value="<?php echo $announcementData['quantity'];?>" disabled required>
           </div>
             
           <div class="form-group">
@@ -221,6 +227,6 @@ label {
   </div>  
 
 
-<script src="request.js"></script>
+<script src="offer.js"></script>
 </body>
 </html>

@@ -43,7 +43,10 @@ CREATE TABLE citizen(
 CREATE TABLE announcements(
   announ_id INT NOT NULL AUTO_INCREMENT,
   description TEXT NOT NULL,
-  PRIMARY KEY(announ_id)
+  categ_name VARCHAR(32) NOT NULL,
+  item_name VARCHAR(50) NOT NULL,
+  quantity INT DEFAULT 0,
+  PRIMARY KEY(announ_id),
 );
 
 CREATE TABLE category(
@@ -94,23 +97,15 @@ CREATE TABLE announced_item(
 
 CREATE TABLE task(
   task_id INT NOT NULL AUTO_INCREMENT,
-  t_cords POINT NOT NULL,
+  citizen_id INT NOT NULL,
+  resc_id INT DEFAULT NULL,
+  withdraw_date DATETIME DEFAULT NULL,
+  quantity INT DEFAULT 1,
+  id INT NOT NULL,
   active BOOLEAN DEFAULT FALSE,
   publish_date DATETIME NOT NULL,
-  PRIMARY KEY(task_id)  
-);
-
-CREATE TABLE request(
-  request_id INT NOT NULL,
-  citizen_id INT NOT NULL,
-  resc_id INT NOT NULL,
-  id INT NOT NULL,
-  occ_date DATETIME DEFAULT NULL,
-  ppl INT DEFAULT 1,
-  CONSTRAINT fk_request1_id FOREIGN KEY(request_id)
-  REFERENCES task(task_id)
-  ON DELETE CASCADE
-  ON UPDATE CASCADE,
+  complete BOOLEAN DEFAULT FALSE,
+  PRIMARY KEY(task_id),
 
   CONSTRAINT fk_prod3_id FOREIGN KEY(id)
   REFERENCES inventory(id)
@@ -128,30 +123,22 @@ CREATE TABLE request(
   ON UPDATE CASCADE
 );
 
-CREATE TABLE donation(
-  donate_id INT NOT NULL,
-  citizen_id INT NOT NULL,
-  resc_id INT DEFAULT NULL,
-  id INT NOT NULL,
-  occ_date DATETIME DEFAULT NULL,
-  quantity INT DEFAULT 1,
-  CONSTRAINT fk_donate1_id FOREIGN KEY(donate_id)
+CREATE TABLE request(
+  request_id INT NOT NULL,
+  location POINT NOT NULL,
+
+  CONSTRAINT fk_task_id1 FOREIGN KEY(request_id)
   REFERENCES task(task_id)
   ON DELETE CASCADE
-  ON UPDATE CASCADE,
+  ON UPDATE CASCADE
+);
 
-  CONSTRAINT fk_prod4_id FOREIGN KEY(id)
-  REFERENCES inventory(id)
-  ON DELETE CASCADE
-  ON UPDATE CASCADE,
+CREATE TABLE donation(
+  donate_id INT NOT NULL,
+  location POINT NOT NULL,
 
-  CONSTRAINT fk_citizen3_id FOREIGN KEY(citizen_id)
-  REFERENCES citizen(citizen_id)
-  ON DELETE CASCADE
-  ON UPDATE CASCADE,
-
-  CONSTRAINT fk_rescuer4_id FOREIGN KEY(resc_id)
-  REFERENCES rescuer(resc_id)
+  CONSTRAINT fk_donate1_id FOREIGN KEY(donate_id)
+  REFERENCES task(task_id)
   ON DELETE CASCADE
   ON UPDATE CASCADE
 );

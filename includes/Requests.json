@@ -1,0 +1,16 @@
+[
+    {
+        "task_id": 8,
+        "withdraw_date": null,
+        "task_quantity": 4,
+        "active": 0,
+        "publish_date": "2024-01-16 16:46:41",
+        "user_name": "user",
+        "user_lastname": "user",
+        "user_phone": "1111111111",
+        "rescuer_car_name": null,
+        "lng": 21.733171,
+        "lat": 38.246,
+        "inventory_item_name": "Water"
+    }
+]

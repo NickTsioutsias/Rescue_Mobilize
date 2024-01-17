@@ -2,7 +2,7 @@
     {
         "id": 16,
         "name": "Water",
-        "quantity": 5,
+        "quantity": 15,
         "categ_id": 6
     },
     {
@@ -404,7 +404,7 @@
     {
         "id": 84,
         "name": "water ",
-        "quantity": 5,
+        "quantity": 15,
         "categ_id": 6
     },
     {
@@ -848,6 +848,12 @@
     {
         "id": 158,
         "name": "Testerssss",
+        "quantity": 0,
+        "categ_id": 5
+    },
+    {
+        "id": 159,
+        "name": "aaaa",
         "quantity": 0,
         "categ_id": 5
     }

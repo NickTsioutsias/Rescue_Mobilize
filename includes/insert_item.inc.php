@@ -1,7 +1,5 @@
 <?php
 
-  //  PHP script for the Register form to insert rescuer submissions in the database 
-
   if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     require "../database.php";

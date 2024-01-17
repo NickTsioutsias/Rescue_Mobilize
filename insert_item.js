@@ -1,3 +1,4 @@
+// Load Categories
 let xhr = new XMLHttpRequest();
 xhr.open('GET', 'includes/Categories.json', true);
 xhr.onload = function(){
@@ -31,6 +32,7 @@ document.getElementById('item-form').addEventListener('submit', function(event){
   event.preventDefault();
 
   let category = document.getElementById('category').value;
+  console.log(category);
   let item = document.getElementById('item').value;
 
   let xhr = new XMLHttpRequest();
