@@ -1,55 +1,51 @@
-<?php
-  require "config.php";
-  // Role checking
-  if($_SESSION['role'] != 'admin'){
-    header("Location: index.php");
-    exit();
-  }
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Insert Items</title>
-  <link rel="stylesheet" href="LoginCSS.css">
+  <title>Document</title>
   <style>
-    body{
+    body {
+      margin: 0; /* Remove default margin */
+      font-family: Arial, Helvetica, sans-serif;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      justify-content: flex-start;
     }
-    p{
-      color: red;
+
+    .announcements1 {
+      max-height: 33vh;
+      overflow: auto;
     }
-    #category {
-    padding: 8px;
-    font-size: 14px;
-    width: 200px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    background-color: #f8f8f8;
-  }
 
-  /* Style for the options within the select element */
-  #category option {
-    padding: 8px;
-    font-size: 12px;
-    color: #333;
-    background-color: #fff;
-  }
+    .history {
+      border-collapse: collapse;
+      width: 100%;
+    }
 
-  /* Hover effect for options */
-  #category option:hover {
-    background-color: #e0e0e0;
-  }
+    .history td{
+      border: 1px solid #ddd;
+      padding: 8px;
+      width: 50%;
+    }
+    .history th{
+      border: 1px solid #ddd;
+      padding: 8px;
+      width: 40%;
+    }
 
-  /* Style for the selected option */
-  #category option:checked {
-    background-color: #ddd;
-    font-weight: bold;
-  }
-  #nav_container {
+    .history tr:nth-child(even){background-color: #f2f2f2;}
+
+    .history tr:hover {background-color: #ddd;}
+
+    .history th {
+      padding-top: 12px;
+      padding-bottom: 12px;
+      text-align: left;
+      background-color: #007bff;
+      color: white;
+    }
+    #nav_container {
       /* form should take a third of the page */
       width: 100%;
       padding: 20px;
@@ -80,20 +76,36 @@
       display: flex;
       align-items: center;
   }
+  button {
+      width: 100%;
+      padding: 8px 10px;
+      border: none;
+      border-radius: 3px;
+      background-color: #007bff;
+      color: white;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
   </style>
 </head>
 <body>
+
 <div id="nav_container">
   <nav class="navbar">
     <ul>
-      <li><a href="main_admin.php">HOME.</a></li>
+      <li><a href="main_admin.php">Home.</a></li>
       <!-- Page for rescuer registration -->
       <li><a href="signup_rescuer.php">Create a Rescuer account.</a></li>
+        <!-- Page for adding new categories in database -->
       <li><a href="insert_category.php">Insert categories.</a></li>
+      <!--  Page for adding new items in database -->
+      <li><a href="insert_item.php">Insert items.</a></li>
       <!-- Page for altering quantities of items in database -->
       <li><a href="item_quantity.php">Change quantity of items here.</a></li>
       <li><a href="announcements.php">Create announcements</a></li>
-      <li><a href="inventory.php">Inventory</a></li>
       <li><a href="charts.php">Charts</a></li>
       <li>
         <form id="logout-form">
@@ -103,28 +115,28 @@
     </ul>
   </nav>
   </div>
-<div class="login-container" style="margin-bottom: 200px;">
-  <h2>Insert items!</h2>
 
-  <form id="item-form">
-    
-    <div class="form-group">
-      <label for="category">Category</label>
-      <select id="category" name="category"></select> 
-    </div>
-
-    <div class="form-group">
-      <label for="item">Item</label>
-      <input type="text" id="item" name="item" disabled required>   
-    </div>
-    
-    <button type="submit" name="submit-button" id="submit-button">Submit</button>
-    
-  </form>
-
-  <p id="message" class="error-message"></p>
+  <h2>Base inventory</h2>
+  <table class="history">
+    <tr>
+      <th>Item</th>
+      <th style="width:41%;">Quantity</th>
+    </tr>
+  </table>
   
-</div>
-<script src="insert_item.js"></script>
+  <div class="announcements1">
+    <table id="base-inventory" class="history">
+      <tr>
+        <td></td>
+        <td></td>
+      </tr>
+    </table>
+  </div>
+
+  <div id="car-inventory"></div>
+
+  
+
+  <script src="inventory.js"></script>
 </body>
 </html>

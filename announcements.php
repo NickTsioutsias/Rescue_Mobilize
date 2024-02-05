@@ -153,6 +153,8 @@
       <li><a href="insert_item.php">Insert items.</a></li>
       <!-- Page for altering quantities of items in database -->
       <li><a href="item_quantity.php">Change quantity of items here.</a></li>
+      <li><a href="inventory.php">Inventory</a></li>
+      <li><a href="charts.php">Charts</a></li>
       <li>
         <form id="logout-form">
         <button type="submit" id="logout-button" name="logout-submit">Logout</button>

@@ -2,6 +2,7 @@
   // In this file we convert request data to a JSON file
   require "../database.php";
   require "../config.php";
+  $user_id = $_SESSION['user_id'];
 
   $sql = "SELECT
   task.task_id,

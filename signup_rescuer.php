@@ -215,7 +215,7 @@
     <form id="logout-form">
       <button type="submit" id="logout-button" name="logout-submit" style="width: 200px;">Logout</button>
     </form>
-    <div class="login-container">
+    <div class="login-container" style="margin-top: 0; padding-top: 0; padding-bottom: 0;">
       <h2>Sign up!</h2>
 
       <form id="rescuer-form">

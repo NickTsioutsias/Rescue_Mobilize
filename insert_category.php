@@ -86,7 +86,7 @@
 <div id="nav_container">
   <nav class="navbar">
     <ul>
-      <li><a href="main_admin.php">Home.</a></li>
+      <li><a href="main_admin.php">HOME.</a></li>
       <!-- Page for rescuer registration -->
       <li><a href="signup_rescuer.php">Create a Rescuer account.</a></li>
       <!--  Page for adding new items in database -->
@@ -94,6 +94,8 @@
       <!-- Page for altering quantities of items in database -->
       <li><a href="item_quantity.php">Change quantity of items here.</a></li>
       <li><a href="announcements.php">Create announcements</a></li>
+      <li><a href="inventory.php">Inventory</a></li>
+      <li><a href="charts.php">Charts</a></li>
       <li>
         <form id="logout-form">
         <button type="submit" id="logout-button" name="logout-submit">Logout</button>
@@ -101,7 +103,7 @@
       </li>
     </ul>
   </nav>
-</div>
+  </div>
 <div class="login-container" style="margin-top: 10%;">
     <h2>Add category!</h2>
 

@@ -1,0 +1,11 @@
+[
+    {
+        "task_id": 30,
+        "user_name": "user",
+        "user_lastname": "user",
+        "user_phone": "6666666666",
+        "publish_date": "2024-02-03 18:53",
+        "inventory_item_name": "Canned corn",
+        "task_quantity": 3
+    }
+]

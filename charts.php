@@ -1,55 +1,32 @@
 <?php
+  require "database.php";
   require "config.php";
-  // Role checking
-  if($_SESSION['role'] != 'admin'){
-    header("Location: index.php");
+  // If we are not logged in stuff happens here
+  if ($_SESSION['role'] != 'admin') {
+    header("Location: login.html");  
     exit();
   }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Insert Items</title>
-  <link rel="stylesheet" href="LoginCSS.css">
+  <title>Charts</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+
   <style>
-    body{
+       body {
+      margin: 0; /* Remove default margin */
+      font-family: Arial, Helvetica, sans-serif;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      justify-content: flex-start;
     }
-    p{
-      color: red;
-    }
-    #category {
-    padding: 8px;
-    font-size: 14px;
-    width: 200px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    background-color: #f8f8f8;
-  }
-
-  /* Style for the options within the select element */
-  #category option {
-    padding: 8px;
-    font-size: 12px;
-    color: #333;
-    background-color: #fff;
-  }
-
-  /* Hover effect for options */
-  #category option:hover {
-    background-color: #e0e0e0;
-  }
-
-  /* Style for the selected option */
-  #category option:checked {
-    background-color: #ddd;
-    font-weight: bold;
-  }
-  #nav_container {
+        #nav_container {
       /* form should take a third of the page */
       width: 100%;
       padding: 20px;
@@ -80,21 +57,37 @@
       display: flex;
       align-items: center;
   }
+  button {
+      width: 100%;
+      padding: 8px 10px;
+      border: none;
+      border-radius: 3px;
+      background-color: #007bff;
+      color: white;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
   </style>
 </head>
 <body>
+
 <div id="nav_container">
   <nav class="navbar">
     <ul>
-      <li><a href="main_admin.php">HOME.</a></li>
+      <li><a href="main_admin.php">Home.</a></li>
       <!-- Page for rescuer registration -->
       <li><a href="signup_rescuer.php">Create a Rescuer account.</a></li>
+        <!-- Page for adding new categories in database -->
       <li><a href="insert_category.php">Insert categories.</a></li>
+      <!--  Page for adding new items in database -->
+      <li><a href="insert_item.php">Insert items.</a></li>
       <!-- Page for altering quantities of items in database -->
       <li><a href="item_quantity.php">Change quantity of items here.</a></li>
       <li><a href="announcements.php">Create announcements</a></li>
       <li><a href="inventory.php">Inventory</a></li>
-      <li><a href="charts.php">Charts</a></li>
       <li>
         <form id="logout-form">
         <button type="submit" id="logout-button" name="logout-submit">Logout</button>
@@ -103,28 +96,8 @@
     </ul>
   </nav>
   </div>
-<div class="login-container" style="margin-bottom: 200px;">
-  <h2>Insert items!</h2>
 
-  <form id="item-form">
-    
-    <div class="form-group">
-      <label for="category">Category</label>
-      <select id="category" name="category"></select> 
-    </div>
-
-    <div class="form-group">
-      <label for="item">Item</label>
-      <input type="text" id="item" name="item" disabled required>   
-    </div>
-    
-    <button type="submit" name="submit-button" id="submit-button">Submit</button>
-    
-  </form>
-
-  <p id="message" class="error-message"></p>
-  
-</div>
-<script src="insert_item.js"></script>
+<canvas id="myChart" width="400" height="200"></canvas>
+  <script src="charts.js"></script>
 </body>
 </html>

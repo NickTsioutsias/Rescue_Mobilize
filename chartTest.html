@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body{
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+    }
+    #nav_container {
+      /* form should take a third of the page */
+      width: 100%;
+      padding: 20px;
+      padding: 0;
+    }
+    .navbar{
+      /* Place CSS for navigation bar here */
+      display: flex;
+      flex-direction: column;
+      background-color: #007bff;
+      width: 100%; /* Set the width to 100% */
+      max-height: 10%;
+      }
+    ul {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap; /* Enable wrapping for multiple columns */
+      justify-content: space-around;
+      margin: 0; /* Remove default margin for ul */
+      padding: 0; /* Remove default padding for ul */
+      width: 100%;
+    }
+    .navbar a {
+      background-color: #007bff;
+      color: white;
+      text-align: center;
+      text-decoration: none;
+      height: 100%;
+      display: flex;
+      align-items: center;
+  }
+  button {
+      width: 100%;
+      padding: 8px 10px;
+      border: none;
+      border-radius: 3px;
+      background-color: #007bff;
+      color: white;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div id="nav_container">
+    <nav class="navbar">
+      <ul>
+        <li><a href="main_admin.php">Home.</a></li>
+        <!-- Page for rescuer registration -->
+        <li><a href="signup_rescuer.php">Create a Rescuer account.</a></li>
+          <!-- Page for adding new categories in database -->
+        <li><a href="insert_category.php">Insert categories.</a></li>
+        <!--  Page for adding new items in database -->
+        <li><a href="insert_item.php">Insert items.</a></li>
+        <!-- Page for altering quantities of items in database -->
+        <li><a href="item_quantity.php">Change quantity of items here.</a></li>
+        <li><a href="announcements.php">Create announcements</a></li>
+        <li><a href="inventory.php">Inventory</a></li>
+        <li>
+          <form id="logout-form">
+          <button type="submit" id="logout-button" name="logout-submit">Logout</button>
+          </form>
+        </li>
+      </ul>
+    </nav>
+    </div>
+
+
+<canvas id="myChart" style="max-height: 500px;"></canvas>
+
+  <script>
+    const obj1 = [
+  { publish_date: '2024-01-17', requests: 1 },
+  { publish_date: '2024-01-22', requests: 1 },
+  { publish_date: '2024-01-28', requests: 1 }
+];
+
+const obj2 = [
+  { complete_date: '2024-01-28', completed_requests: 1 }
+];
+
+const obj3 = [
+  { complete_date: '2024-01-28', completed_offers: 1 }
+];
+
+const obj4 = [
+  { publish_date: '2024-01-16', offers: 1 },
+  { publish_date: '2024-01-28', offers: 2 }
+];
+
+const combinedObject = [
+  ...obj1,
+  ...obj2.map(item => ({ date: item.complete_date, requests: 0, offers: 0, completed_requests: item.completed_requests, completed_offers: 0 })),
+  ...obj3.map(item => ({ date: item.complete_date, requests: 0, offers: 0, completed_requests: 0, completed_offers: item.completed_offers })),
+  ...obj4
+];
+
+console.log(combinedObject);
+
+// Group the combinedObject by date
+// make a new array that has all the elements of the first array and second array
+// but the rows of the second array must be followed by the elements of the first array and then convert those rows to have the complete_date for the publish_date, 0 requests and the completed requests
+// take the combinedObject and change it in every row 
+// at the first iteration the accumulator is empty
+
+const groupedObject = combinedObject.reduce((acc, item) => {
+  const date = item.date || item.publish_date;
+  // find in the accumulator if there is a row (entry) that has the same date 
+  const existingItem = acc.find(entry => entry.date === date);
+  // If found, existingItem will reference that entry.
+    // If completed_requests in that row do a plus 1 there for that row
+      // If not then it means this was from the first array of the new requests
+    // If there is no entry with the same date then create a new row in the accumulator array with that date and keep going
+
+  if (existingItem) {
+    existingItem.values.requests += item.requests || 0;
+    existingItem.values.offers += item.offers || 0;
+    existingItem.values.completed_requests += item.completed_requests || 0;
+    existingItem.values.completed_offers += item.completed_offers || 0;
+  } else {
+    const newItem = {
+      date,
+      values: {
+        requests: item.requests || 0,
+        offers: item.offers || 0,
+        completed_requests: item.completed_requests || 0,
+        completed_offers: item.completed_offers || 0
+      }
+    };
+    acc.push(newItem);
+  }
+
+  return acc;
+}, []);
+
+console.log(groupedObject);
+
+
+// Extract the dates and values from the groupedObject
+const dates = groupedObject.map(item => item.date);
+console.log(dates);
+    const requests = groupedObject.map(item => item.values.requests);
+    console.log(requests);
+    const offers = groupedObject.map(item => item.values.offers);
+    console.log(offers);
+    const completedRequests = groupedObject.map(item => item.values.completed_requests);
+    console.log(completedRequests);
+    const completedOffers = groupedObject.map(item => item.values.completed_offers);
+    console.log(completedOffers);
+
+    // Create a bar chart using Chart.js
+    const ctx = document.getElementById('myChart').getContext('2d');
+    const myChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: dates,
+        datasets: [{
+          label: 'Requests',
+          data: requests,
+          backgroundColor: 'yellow', // Bar color
+          borderColor: 'rgba(75, 192, 192, 1)', // Border color
+          borderWidth: 1
+        },
+        {
+          label: 'Offers',
+          data: offers,
+          backgroundColor: 'green', // Bar color
+          borderColor: 'rgba(75, 192, 192, 1)', // Border color
+          borderWidth: 1
+        },
+        {
+          label: 'Completed Requests',
+          data: completedRequests,
+          backgroundColor: 'blue', // Bar color
+          borderColor: 'rgba(75, 192, 192, 1)', // Border color
+          borderWidth: 1
+        },
+        {
+          label: 'Completed Offers',
+          data: completedOffers,
+          backgroundColor: 'purple', // Bar color
+          borderColor: 'rgba(75, 192, 192, 1)', // Border color
+          borderWidth: 1
+        }
+      ]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        },
+        maintainAspectRatio: false, // To allow the chart to be smaller
+        responsive: true
+      }
+    });
+
+    // Logout request
+document.getElementById('logout-form').addEventListener('submit', function(event){
+  event.preventDefault();
+
+  let xhr1 = new XMLHttpRequest();
+  xhr1.open('post', 'includes/logout.php', true);
+  xhr1.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+  xhr1.onload = function(){
+    if(xhr1.status == 200){
+      console.log(this.responseText);
+      // Get response as JSON data
+      let response = JSON.parse(this.responseText);
+      if(response.success){
+        // Redirect 
+        window.location.href = response.redirect;
+      }
+    }
+  };
+// Send as associative arrays to logout.php
+xhr1.send();
+}); 
+  </script>
+</body>
+</html>

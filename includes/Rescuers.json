@@ -1,16 +1,100 @@
-[
-    {
-        "resc_id": 39,
-        "curr_task": 0,
-        "lng": 21.73306072251771,
-        "lat": 38.24468540071217,
-        "car_name": "rescuercar"
-    },
-    {
-        "resc_id": 45,
-        "curr_task": 0,
-        "lng": 21.743929,
-        "lat": 38.24393,
-        "car_name": "dfd"
-    }
-]
+{
+    "39": [
+        {
+            "resc_id": 39,
+            "curr_task": 2,
+            "lng": 21.734991073608402,
+            "lat": 38.24616838845623,
+            "car_name": "rescuercar",
+            "quantity": 5,
+            "name": "Water"
+        },
+        {
+            "resc_id": 39,
+            "curr_task": 2,
+            "lng": 21.734991073608402,
+            "lat": 38.24616838845623,
+            "car_name": "rescuercar",
+            "quantity": 0,
+            "name": "Underwear"
+        },
+        {
+            "resc_id": 39,
+            "curr_task": 2,
+            "lng": 21.734991073608402,
+            "lat": 38.24616838845623,
+            "car_name": "rescuercar",
+            "quantity": 0,
+            "name": "Test Val"
+        },
+        {
+            "resc_id": 39,
+            "curr_task": 2,
+            "lng": 21.734991073608402,
+            "lat": 38.24616838845623,
+            "car_name": "rescuercar",
+            "quantity": 0,
+            "name": "Blanket"
+        },
+        {
+            "resc_id": 39,
+            "curr_task": 2,
+            "lng": 21.734991073608402,
+            "lat": 38.24616838845623,
+            "car_name": "rescuercar",
+            "quantity": 5,
+            "name": "Coca Cola"
+        },
+        {
+            "resc_id": 39,
+            "curr_task": 2,
+            "lng": 21.734991073608402,
+            "lat": 38.24616838845623,
+            "car_name": "rescuercar",
+            "quantity": 6,
+            "name": "First Aid Kit"
+        },
+        {
+            "resc_id": 39,
+            "curr_task": 2,
+            "lng": 21.734991073608402,
+            "lat": 38.24616838845623,
+            "car_name": "rescuercar",
+            "quantity": 0,
+            "name": "Gauze"
+        }
+    ],
+    "47": [
+        {
+            "resc_id": 47,
+            "curr_task": 1,
+            "lng": 21.735525937325598,
+            "lat": 38.246421167440005,
+            "car_name": "rescuer2",
+            "quantity": 5,
+            "name": "Menstrual Pads"
+        }
+    ],
+    "45": [
+        {
+            "resc_id": 45,
+            "curr_task": 0,
+            "lng": 21.743929,
+            "lat": 38.24393,
+            "car_name": "dfd",
+            "quantity": null,
+            "name": null
+        }
+    ],
+    "48": [
+        {
+            "resc_id": 48,
+            "curr_task": 0,
+            "lng": 21.739091,
+            "lat": 38.243759,
+            "car_name": "rescuercar3",
+            "quantity": null,
+            "name": null
+        }
+    ]
+}

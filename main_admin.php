@@ -3,7 +3,7 @@
   require "config.php";
   // If we are not logged in stuff happens here
   if ($_SESSION['role'] != 'admin') {
-    header("Location: index.php");  
+    header("Location: login.html");  
     exit();
   }
 ?>
@@ -29,7 +29,6 @@
     body {
       font-family: Arial, sans-serif;
       display: flex;
-      /* containers should be in rows */
       flex-direction: column;
       justify-content: flex-start;
       margin: 0;
@@ -120,6 +119,8 @@
       <!-- Page for altering quantities of items in database -->
       <li><a href="item_quantity.php">Change quantity of items here.</a></li>
       <li><a href="announcements.php">Create announcements</a></li>
+      <li><a href="inventory.php">Inventory</a></li>
+      <li><a href="chartTest.html">Charts</a></li>
       <li>
         <form id="logout-form">
         <button type="submit" id="logout-button" name="logout-submit">Logout</button>
@@ -137,6 +138,10 @@
   <div id="map">
    <!-- Make map location -->
   <script>
+
+    let greenMarkers = [];
+    let yellowMarkers = [];
+
     var map = L.map('map').setView([
           38.2463673403233,21.735140649945635], 16);
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -145,6 +150,11 @@
     }).addTo(map);
     // Declare marker globally to make it accessible in other functions
     let marker;
+    let markers = {};
+    let taskID;
+    let offerMarkersMap = {};
+    let requestMarkersMap = {};
+    let polylines = [];
 
 
 // Get base coordinates from database
@@ -204,132 +214,219 @@ function insertIntoDatabase(latitude, longitude) {
 }
 
 
+// Assume getCarInv function is defined before this code
+
+// Get rescuers coordinates from database
 // Get rescuers coordinates from database
 let xhr4 = new XMLHttpRequest();
-xhr4.open('GET', 'includes/rescuer_to_json.php', true);
+xhr4.open('GET', 'includes/rescuer_to_json.inc.php', true);
 xhr4.setRequestHeader('Content-type', 'application/json');
 
-xhr4.onload = function(){
-  if(xhr4.status == 200){
-    let response = JSON.parse(this.responseText);
-    response.forEach(function(item){
-      let carName = item.car_name;
-      let lng = item.lng;
-      let lat = item.lat;
-      let currTask = item.curr_task;
-      console.log("Car Name: " + carName + ", Longitude: " + lng + ", Latitude: " + lat);
-      rescuerMarker = L.marker([lat, lng], {icon: L.divIcon({
-                className: 'custom-marker',
-                html: '<div style="background-color: red;" class="marker-dot"></div>',
-                iconSize: [20, 20], // Adjust the size if needed
-                iconAnchor: [10, 10] // Adjust the anchor point if needed
-            })}).addTo(map);
-      rescuerMarker.bindPopup('<b>Car Name:' + carName + '.</b><br><b>Tasks:' + currTask + '</b>').openPopup();
-    });
-    // marker = L.marker([jsonData[0].lat, jsonData[0].lng], {draggable: true}).addTo(map);
-    // marker.bindPopup('<b>Base.</b>').openPopup();
-  }
+xhr4.onload = function () {
+  if (xhr4.status == 200) {
+    let responseObject = JSON.parse(this.responseText);
 
+    // Create an object to store quantities and names for each resc_id
+    let quantitiesAndNames = {};
+
+    Object.keys(responseObject).forEach(function (rescId) {
+      let arrayForRescId = responseObject[rescId];
+
+      arrayForRescId.forEach(function (item) {
+        let carName = item.car_name;
+        let lng = item.lng;
+        let lat = item.lat;
+        let currTask = item.curr_task;
+        let quantity = item.quantity;
+        let name = item.name;
+
+        console.log('<span style="display: none;">' + rescId + '</span>Car Name: ' + carName + ', Longitude: ' + lng + ', Latitude: ' + lat);
+
+        rescuerMarker = L.marker([lat, lng], {
+          icon: L.divIcon({
+            className: 'custom-marker',
+            html: '<div style="background-color: red;" class="marker-dot"></div>',
+            iconSize: [20, 20],
+            iconAnchor: [10, 10]
+          })
+        }).addTo(map);
+
+        // Initialize the array for each resc_id if not already done
+        quantitiesAndNames[rescId] = quantitiesAndNames[rescId] || [];
+
+        // Push quantity and name to the array
+        quantitiesAndNames[rescId].push({ quantity: quantity, name: name });
+
+        // Add click event listener to the marker
+        rescuerMarker.on('click', function () {
+          // Call your custom function here
+          rescuerMarkerClick(rescId, lat, lng);
+        });
+
+        // Construct content for the bindPopup
+        let content = '<b>Car Name: ' + carName + '</b><br>' +
+                      '<b>Tasks: ' + currTask + '</b><br>';
+
+        // Concatenate quantities and names for the current resc_id
+        quantitiesAndNames[rescId].forEach(function (item) {
+          content += '<b>Name: ' + item.name + '</b>' + ', ' +
+          '<b>Quantity: ' + item.quantity + '</b><br>';
+        });
+
+        // Add the content to the marker's popup
+        rescuerMarker.bindPopup(content).openPopup();
+      });
+    });
+  }
 };
+
 xhr4.send();
 
-// Get requests coordinates from database
-let xhr5 = new XMLHttpRequest();
+
+
+
+requestsCoordinates();
+
+        // Get requests coordinates from database
+        function requestsCoordinates(){
+          let xhr5 = new XMLHttpRequest();
 xhr5.open('GET', 'includes/request-coordinates.inc.php', true);
 xhr5.setRequestHeader('Content-type', 'application/json');
 
-xhr5.onload = function(){
-  if(xhr5.status == 200){
-    let response = JSON.parse(this.responseText);
-    response.forEach(function(item){
-      let name = item.user_name;
-      let lastname = item.user_lastname;
-      let phone = item.user_phone;
-      let publishDate = item.publish_date;
-      let itemName = item.inventory_item_name;
-      let quantity = item.task_quantity;
-      let withdrawDate = item.withdraw_date;
-      let carName = item.rescuer_car_name;
-      let lng = item.lng; 
-      let lat = item.lat;
-      let active = item.active;
-      let color;
-      if(active == 0){
-        color = 'green';
-      }
-      else{
-        color = 'purple';
-      }
-      console.log("Name: " + name + "Lastname: " + lastname +
-      "Phone: " + phone +"Publish Date: " + publishDate +"Item name: " + itemName +
-      "Quantity: " + quantity + ", Withdrawal Date: " + withdrawDate + ", Car name: " + carName);
-      requestMarker = L.marker([lat, lng], {icon: L.divIcon({
-                className: 'custom-marker',
-                html: '<div style="background-color: yellow;" class="marker-dot"></div>',
-                iconSize: [20, 20], // Adjust the size if needed
-                iconAnchor: [10, 10] // Adjust the anchor point if needed
-            })}).addTo(map);
-      requestMarker.bindPopup('<b>Name:' + name + '.</b><br><b>Lastname:' + lastname +
-      '.</b><br><b>Phone:' + phone + '.</b><br><b>Publish Date:' + publishDate +
-      '.</b><br><b>Item name:' + itemName + '.</b><br><b>Quantity:' + quantity +
-      '.</b><br><b>Withdrawal Date:' + withdrawDate + '.</b><br><b>Car name:' + carName + '</b><br>'
-      ).openPopup();
-    });
-    // marker = L.marker([jsonData[0].lat, jsonData[0].lng], {draggable: true}).addTo(map);
-    // marker.bindPopup('<b>Base.</b>').openPopup();
-  }
+xhr5.onload = function () {
+    if (xhr5.status == 200) {
+        let response = JSON.parse(this.responseText);
+        let counter = 1;
 
+        response.forEach(function (item) {
+            let taskID = item.task_id;
+            let name = item.user_name;
+            let lastname = item.user_lastname;
+            let phone = item.user_phone;
+            let publishDate = item.publish_date;
+            let itemName = item.inventory_item_name;
+            let quantity = item.task_quantity;
+            let withdrawDate = item.withdraw_date;
+            let carName = item.rescuer_car_name;
+            let lng = item.lng;
+            let lat = item.lat;
+            let active = item.active;
+            let color;
+
+            let requestMarker = L.marker([lat, lng], {
+                icon: L.divIcon({
+                    className: 'custom-marker',
+                    iconSize: [20, 20],
+                    iconAnchor: [10, 10]
+                })
+            }).addTo(map);
+
+            if (active == 0) {
+                color = 'yellow';
+                yellowMarkers.push(requestMarker);
+            } else {
+                color = 'blue';
+            }
+
+            // Set marker icon HTML based on color
+            requestMarker.setIcon(L.divIcon({
+                className: 'custom-marker',
+                html: '<div style="background-color: ' + color + ';" class="marker-dot"></div>',
+                iconSize: [20, 20],
+                iconAnchor: [10, 10]
+            }));
+
+            offerMarkersMap[taskID] = requestMarker;
+
+            requestMarker.bindPopup('<span style="display: none;"><b>Task_id:' + taskID + '.</b></span>' + '<b>Name:' + name + '.</b><br><b>Lastname:' + lastname +
+                '.</b><br><b>Phone:' + phone + '.</b><br><b>Publish Date:' + publishDate +
+                '.</b><br><b>Item name:' + itemName + '.</b><br><b>Quantity:' + quantity +
+                '.</b><br><b>Withdrawal Date:' + withdrawDate + '.</b><br><b>Car name:' + carName 
+                ).openPopup();
+
+            counter++;
+        });
+
+    }
 };
+
 xhr5.send();
+        }
+
+offersCoordinates();
 
 // Get offers coordinates from database
-let xhr6 = new XMLHttpRequest();
+function offersCoordinates(){
+          let xhr6 = new XMLHttpRequest();
 xhr6.open('GET', 'includes/offer-coordinates.inc.php', true);
 xhr6.setRequestHeader('Content-type', 'application/json');
 
-xhr6.onload = function(){
-  if(xhr6.status == 200){
-    let response = JSON.parse(this.responseText);
-    response.forEach(function(item){
-      let name = item.user_name;
-      let lastname = item.user_lastname;
-      let phone = item.user_phone;
-      let publishDate = item.publish_date;
-      let itemName = item.inventory_item_name;
-      let quantity = item.task_quantity;
-      let withdrawDate = item.withdraw_date;
-      let carName = item.rescuer_car_name;
-      let lng = item.lng; 
-      let lat = item.lat;
-      let active = item.active;
-      let color;
-      if(active == 0){
-        color = 'green';
-      }
-      else{
-        color = 'purple';
-      }
-      console.log("Name: " + name + "Lastname: " + lastname +
-      "Phone: " + phone +"Publish Date: " + publishDate +"Item name: " + itemName +
-      "Quantity: " + quantity + ", Withdrawal Date: " + withdrawDate + ", Car name: " + carName);
-      requestMarker = L.marker([lat, lng], {icon: L.divIcon({
-                className: 'custom-marker',
-                html: '<div style="background-color: green;" class="marker-dot"></div>',
-                iconSize: [20, 20], // Adjust the size if needed
-                iconAnchor: [10, 10] // Adjust the anchor point if needed
-            })}).addTo(map);
-      requestMarker.bindPopup('<b>Name:' + name + '.</b><br><b>Lastname:' + lastname +
-      '.</b><br><b>Phone:' + phone + '.</b><br><b>Publish Date:' + publishDate +
-      '.</b><br><b>Item name:' + itemName + '.</b><br><b>Quantity:' + quantity +
-      '.</b><br><b>Withdrawal Date:' + withdrawDate + '.</b><br><b>Car name:' + carName + '</b><br>' 
-      ).openPopup();
-    });
-    // marker = L.marker([jsonData[0].lat, jsonData[0].lng], {draggable: true}).addTo(map);
-    // marker.bindPopup('<b>Base.</b>').openPopup();
-  }
+xhr6.onload = function () {
+    if (xhr6.status == 200) {
+        let response = JSON.parse(this.responseText);
+        let counter = 1;
 
+        response.forEach(function (item) {
+            let taskID = item.task_id;
+            let name = item.user_name;
+            let lastname = item.user_lastname;
+            let phone = item.user_phone;
+            let publishDate = item.publish_date;
+            let itemName = item.inventory_item_name;
+            let quantity = item.task_quantity;
+            let withdrawDate = item.withdraw_date;
+            let carName = item.rescuer_car_name;
+            let lng = item.lng;
+            let lat = item.lat;
+            let active = item.active;
+            let color;
+
+            let offerMarker = L.marker([lat, lng], {
+                icon: L.divIcon({
+                    className: 'custom-marker',
+                    iconSize: [20, 20],
+                    iconAnchor: [10, 10]
+                })
+            }).addTo(map);
+
+            if (active == 0) {
+                color = 'green';
+                greenMarkers.push(offerMarker);
+            } else {
+                color = 'purple';
+            }
+
+            // Set marker icon HTML based on color
+            offerMarker.setIcon(L.divIcon({
+                className: 'custom-marker',
+                html: '<div style="background-color: ' + color + ';" class="marker-dot"></div>',
+                iconSize: [20, 20],
+                iconAnchor: [10, 10]
+            }));
+
+            // console.log("Name: " + name + "Lastname: " + lastname +
+            //     "Phone: " + phone + "Publish Date: " + publishDate + "Item name: " + itemName +
+            //     "Quantity: " + quantity + ", Withdrawal Date: " + withdrawDate + ", Car name: " + carName);
+
+            
+            offerMarkersMap[taskID] = offerMarker;
+
+
+            offerMarker.bindPopup('<span style="display: none;"><b>Task_id:' + taskID + '.</b></span>' + '<b>Name:' + name + '.</b><br><b>Lastname:' + lastname +
+                '.</b><br><b>Phone:' + phone + '.</b><br><b>Publish Date:' + publishDate +
+                '.</b><br><b>Item name:' + itemName + '.</b><br><b>Quantity:' + quantity +
+                '.</b><br><b>Withdrawal Date:' + withdrawDate + '.</b><br><b>Car name:' + carName
+            ).openPopup();
+
+            counter++;
+        });
+
+    }
+    
 };
+
 xhr6.send();
+        }
 
 
 
@@ -347,21 +444,115 @@ xhr6.send();
     // // Make marker popup
     // marker.bindPopup('<b>Base</b><br>' + marker.getLatLng() + '.').openPopup();
 
-    
+    // Function for rescuerMarker click
+    function rescuerMarkerClick(rescId, lat, lng) {
+
+      // Clear previously drawn polylines
+      polylines.forEach(function(polyline) {
+        map.removeLayer(polyline);
+      });
+
+      polylines = [];  // Empty the polylines array
+
+      console.log("Marker clicked! Resc_id: " + rescId + ", Latitude: " + lat + ", Longitude: " + lng);
+      // Select active tasks based on this id
+      let xhr7 = new XMLHttpRequest();
+      xhr7.open('POST', 'includes/resc_id-find-task_id.inc.php', true);
+      xhr7.setRequestHeader('Content-type', 'application/json');
+
+      xhr7.onload = function () {
+          if (xhr7.status == 200) {
+              let response = JSON.parse(this.responseText);
+              // Take the task id, find what marker it belongs to and draw the lines between this rescuerMarker and those active tasks
+              console.log(response);
+              // Iterate over each task_id in the response
+              response.data.forEach(function (task) {
+                let taskId = task.task_id;
+
+                // Retrieve the offerMarker associated with the task_id
+                let offerMarker = offerMarkersMap[taskId];
+                let requestMarker = requestMarkersMap[taskId];
+
+                if (offerMarker) {
+                    // Create a polyline between the rescuerMarker and the offerMarker
+                    let polyline = L.polyline([
+                        [lat, lng],
+                        offerMarker.getLatLng()
+                    ]).addTo(map);
+
+                    // Store the polyline in the array
+                    polylines.push(polyline);
+                }
+
+                if (requestMarker) {
+                    // Create a polyline between the rescuerMarker and the offerMarker
+                    let polyline = L.polyline([
+                        [lat, lng],
+                        requestMarker.getLatLng()
+                    ]).addTo(map);
+
+                    // Store the polyline in the array
+                    polylines.push(polyline);
+                }
+              });
+          }
+        };
+        console.log('resc_id: ', rescId);
+        // Convert data to JSON format
+        let jsonData = JSON.stringify({ resc_id: rescId });
+
+        xhr7.send(jsonData);
+    }
+
+    // Function for not active requests
+function toggleYellowMarkers() {
+    yellowMarkers.forEach(function (marker) {
+        if (map.hasLayer(marker)) {
+            map.removeLayer(marker);
+        } else {
+            map.addLayer(marker);
+        }
+    });
+}
+
+// Function for not active offers
+function toggleGreenMarkers() {
+    greenMarkers.forEach(function (marker) {
+        if (map.hasLayer(marker)) {
+            map.removeLayer(marker);
+        } else {
+            map.addLayer(marker);
+        }
+    });
+}
+
+
+
 
   </script>
   </div>
 
+  <div class="flex-container" style="width: 100%; height:auto; border: none; padding: 0; display: flex; flex-direction: row;">
+    <button id="toggleNotActiveRequests">Not active requests Toggle</button>
+    <button id="toggleNotActiveOffers">Not active offers Toggle</button>
+  </div>
+
+  <div>
+      <span style="color: red;">Rescuer: Red, </span>
+      <span style="color: yellow;">Not active Request: Yellow, </span>
+      <span style="color: blue;">Active Request: Blue, </span>
+      <span style="color: green;">Not active Offer: Green, </span>
+      <span style="color: purple;">Active Offer: Purple</span>
+    </div>
+
   <div id="coordinates"></div>
 
-  <script>
-    map.on('click', function (e) {
-      let coordinates = e.latlng;
-      alert("Coordinates: " + coordinates.lat + ", " + coordinates.lng);
-    });
-  </script>
-
   <div id='message'></div>
+
+  <script>
+    document.getElementById('toggleNotActiveOffers').addEventListener('click', toggleGreenMarkers);
+document.getElementById('toggleNotActiveRequests').addEventListener('click', toggleYellowMarkers);
+  </script>
     
 <script src="main_admin.js"></script>
 </body>

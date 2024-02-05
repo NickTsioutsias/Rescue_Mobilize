@@ -93,11 +93,24 @@ let xhr4 = new XMLHttpRequest();
       let jsonData = JSON.parse(this.responseText);
 
       let output = '<tr>' + '<th>' + 'Item name' + '</th>' + '<th>' + 'People' + '</th>' + '<th>' + 'Date' + 
-      '</th>' + '<th>' + 'Situation' + '</th>' + '</tr>';
+      '</th>' + '<th>' + 'Cancel' + '</th>' + '</tr>';
       for (let i in jsonData) {
-        output += '<tr>' + '<td>' + jsonData[i].name + '</td>' + '<td>' + jsonData[i].quantity + '</td>' +
-        '<td>' + jsonData[i].publish_date + '</td>' +  '<td>' + '<button>' +
-        'Offer' + '</button>' + '</td>' + '</tr>';
+        
+        
+        if(jsonData[i].complete == 1){
+          output += '<tr>' + '<td>' + jsonData[i].name + '</td>' + '<td>' + jsonData[i].quantity + '</td>' +
+          '<td>' + jsonData[i].publish_date + '</td>' + 
+          '<td>' +
+          '<button class="cancel-button" id="cancelButton_' + i + '" style="background-color:grey;" onclick="cancel(' + jsonData[i].task_id + ')" disabled>' + 'Cancel' + '</button>' + '</td>' +
+          '</tr>' + '<span style="display:none;">Task_id =' + jsonData[i].task_id + '</span>';
+        }
+        else{
+          output += '<tr>' + '<td>' + jsonData[i].name + '</td>' + '<td>' + jsonData[i].quantity + '</td>' +
+          '<td>' + jsonData[i].publish_date + '</td>' + 
+          '<td>' +
+          '<button class="cancel-button" id="cancelButton_' + i + '" onclick="cancel(' + jsonData[i].task_id + ')">' + 'Cancel' + '</button>' + '</td>' +
+          '</tr>' + '<span style="display:none;">Task_id =' + jsonData[i].task_id + '</span>';
+        }
       }
       document.getElementById('offers-history').innerHTML = output;
     }
@@ -107,3 +120,28 @@ let xhr4 = new XMLHttpRequest();
     }
   };
 xhr4.send();
+
+    // Add the cancel function
+    function cancel(taskId) {
+      console.log('Cancel button clicked for Task ID:', taskId);
+  
+      // Cancel task to citizen and rescuer
+      let xhr11 = new XMLHttpRequest();
+      xhr11.open('POST', 'includes/cancel-task-for-all.inc.php', true);
+      xhr11.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+  
+      console.log('Data being sent to server:', 'task_id=' + taskId);
+  
+      xhr11.onload = function(){
+        console.log(this.responseText); 
+        if(xhr11.status == 200){
+          let response = JSON.parse(this.responseText);
+          document.getElementById('message').innerHTML = response.message;
+  
+          if(response.success){
+            window.location.href = response.redirect;
+          }
+        }
+      };
+      xhr11.send(JSON.stringify({ task_id: taskId }));
+      }

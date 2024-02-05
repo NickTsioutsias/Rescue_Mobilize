@@ -70,6 +70,7 @@ CREATE TABLE inventory(
 CREATE TABLE car_inv(
   resc_id INT NOT NULL,
   id INT NOT NULL,
+  quantity INT DEFAULT NULL,
   CONSTRAINT fk_rescuer2_id FOREIGN KEY(resc_id)
   REFERENCES rescuer(resc_id)
   ON DELETE CASCADE
@@ -77,20 +78,6 @@ CREATE TABLE car_inv(
 
   CONSTRAINT fk_prod1_id FOREIGN KEY(id)
   REFERENCES inventory(id)
-  ON DELETE CASCADE
-  ON UPDATE CASCADE
-);
-
-CREATE TABLE announced_item(
-  id INT NOT NULL,
-  announ_id INT NOT NULL,
-  CONSTRAINT fk_prod2_id FOREIGN KEY(id)
-  REFERENCES inventory(id)
-  ON DELETE CASCADE
-  ON UPDATE CASCADE,
-  
-  CONSTRAINT fk_announ1_id FOREIGN KEY(announ_id)
-  REFERENCES announcements(announ_id)
   ON DELETE CASCADE
   ON UPDATE CASCADE
 );
@@ -105,6 +92,7 @@ CREATE TABLE task(
   active BOOLEAN DEFAULT FALSE,
   publish_date DATETIME NOT NULL,
   complete BOOLEAN DEFAULT FALSE,
+  complete_date DATETIME DEFAULT NULL,
   PRIMARY KEY(task_id),
 
   CONSTRAINT fk_prod3_id FOREIGN KEY(id)

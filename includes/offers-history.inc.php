@@ -4,7 +4,7 @@
 
   $user_id = $_SESSION['user_id'];
   // Create announcement
-  $sql = "SELECT inventory.name, task.quantity, task.publish_date FROM task 
+  $sql = "SELECT task.complete, task.task_id, inventory.name, task.quantity, task.publish_date FROM task 
   INNER JOIN inventory ON task.id = inventory.id 
   INNER JOIN donation ON task.task_id = donation.donate_id 
   WHERE citizen_id = ? AND task_id = donate_id 

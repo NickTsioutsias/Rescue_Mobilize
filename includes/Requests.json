@@ -1,16 +1,72 @@
 [
     {
-        "task_id": 8,
+        "task_id": 20,
+        "withdraw_date": "2024-02-03 22:48:57",
+        "task_quantity": 2,
+        "active": 1,
+        "publish_date": "2024-02-03 16:46:14",
+        "user_name": "user",
+        "user_lastname": "user",
+        "user_phone": "1111111111",
+        "rescuer_car_name": "rescuercar3",
+        "lng": 21.741172,
+        "lat": 38.246826,
+        "inventory_item_name": "Painkillers"
+    },
+    {
+        "task_id": 21,
         "withdraw_date": null,
-        "task_quantity": 4,
+        "task_quantity": 3,
         "active": 0,
-        "publish_date": "2024-01-16 16:46:41",
+        "publish_date": "2024-02-03 16:46:30",
         "user_name": "user",
         "user_lastname": "user",
         "user_phone": "1111111111",
         "rescuer_car_name": null,
-        "lng": 21.733171,
-        "lat": 38.246,
-        "inventory_item_name": "Water"
+        "lng": 21.727831,
+        "lat": 38.241922,
+        "inventory_item_name": "Sterilized Saline"
+    },
+    {
+        "task_id": 23,
+        "withdraw_date": null,
+        "task_quantity": 3,
+        "active": 0,
+        "publish_date": "2024-02-03 18:32:47",
+        "user_name": "user",
+        "user_lastname": "user",
+        "user_phone": "3333333333",
+        "rescuer_car_name": null,
+        "lng": 21.74321,
+        "lat": 38.250516,
+        "inventory_item_name": "Canned corn"
+    },
+    {
+        "task_id": 24,
+        "withdraw_date": null,
+        "task_quantity": 3,
+        "active": 0,
+        "publish_date": "2024-02-03 18:33:10",
+        "user_name": "user",
+        "user_lastname": "user",
+        "user_phone": "3333333333",
+        "rescuer_car_name": null,
+        "lng": 21.742009,
+        "lat": 38.251123,
+        "inventory_item_name": "Bread"
+    },
+    {
+        "task_id": 25,
+        "withdraw_date": null,
+        "task_quantity": 2,
+        "active": 0,
+        "publish_date": "2024-02-03 18:35:41",
+        "user_name": "user",
+        "user_lastname": "user",
+        "user_phone": "4444444444",
+        "rescuer_car_name": null,
+        "lng": 21.742373,
+        "lat": 38.2445,
+        "inventory_item_name": "Underwear"
     }
 ]

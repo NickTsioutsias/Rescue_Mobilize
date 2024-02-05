@@ -173,6 +173,7 @@
     
     <table id="offers-history" class="history"></table>
   </div>
+  <div id="message"></div>
 
   <script src="main_citizen.js"></script>
 
